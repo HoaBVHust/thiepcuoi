@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#315d45">
+  <meta name="description" content="Thiệp cưới Minh Quân & Thu Hà">
+  <title>Minh Quân & Thu Hà — Wedding Invitation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page-loader" id="loader"><div class="loader-flower">❦</div></div>
+
+  <button class="music-button" id="musicButton" aria-label="Bật hoặc tắt nhạc">
+    <span class="music-icon">♫</span>
+  </button>
+  <audio id="weddingMusic" loop preload="none"></audio>
+
+  <main id="weddingPage">
+    <section class="hero" id="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-content reveal">
+        <p class="eyebrow" id="coverEyebrow"></p>
+        <p class="small-caps">WEDDING INVITATION</p>
+        <h1 id="coverTitle"></h1>
+        <div class="ornament">❦</div>
+        <p class="hero-date" id="coverDate"></p>
+        <button class="open-button" id="openInvitation">
+          <span id="openButtonText">Mở thiệp</span>
+          <span>↓</span>
+        </button>
+      </div>
+      <div class="hero-leaf leaf-left">❧</div>
+      <div class="hero-leaf leaf-right">❧</div>
+    </section>
+
+    <section class="section invitation">
+      <div class="container narrow reveal">
+        <p class="section-kicker">THÂN MỜI</p>
+        <div class="gold-line"></div>
+        <h2 id="inviteNames"></h2>
+        <p id="inviteSubtitle"></p>
+        <p class="lunar" id="lunarDate"></p>
+      </div>
+    </section>
+
+    <section class="section couple-section">
+      <div class="botanical botanical-top">❧</div>
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="section-kicker">THE COUPLE</p>
+          <h2>Hai chúng mình</h2>
+        </div>
+        <div class="couple-grid">
+          <article class="person-card reveal">
+            <div class="person-photo groom-photo"></div>
+            <p class="person-role">CHÚ RỂ</p>
+            <h3 id="groomName"></h3>
+          </article>
+          <div class="heart-divider reveal">♥</div>
+          <article class="person-card reveal">
+            <div class="person-photo bride-photo"></div>
+            <p class="person-role">CÔ DÂU</p>
+            <h3 id="brideName"></h3>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section story-section">
+      <div class="container narrow reveal">
+        <p class="section-kicker">OUR STORY</p>
+        <h2 id="storyTitle"></h2>
+        <div class="gold-line"></div>
+        <p class="body-text" id="storyText"></p>
+      </div>
+    </section>
+
+    <section class="section countdown-section">
+      <div class="container reveal">
+        <p class="section-kicker">COUNTDOWN</p>
+        <h2>Đếm ngược đến ngày vui</h2>
+        <div class="countdown" id="countdown">
+          <div><strong data-unit="days">00</strong><span>Ngày</span></div>
+          <div><strong data-unit="hours">00</strong><span>Giờ</span></div>
+          <div><strong data-unit="minutes">00</strong><span>Phút</span></div>
+          <div><strong data-unit="seconds">00</strong><span>Giây</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section gallery-section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="section-kicker">ALBUM</p>
+          <h2>Những khoảnh khắc</h2>
+        </div>
+        <div class="gallery" id="gallery"></div>
+      </div>
+      <div class="lightbox" id="lightbox" aria-hidden="true">
+        <button class="lightbox-close" id="lightboxClose">×</button>
+        <img id="lightboxImage" src="" alt="Ảnh cưới">
+        <button class="lightbox-prev" id="lightboxPrev">‹</button>
+        <button class="lightbox-next" id="lightboxNext">›</button>
+      </div>
+    </section>
+
+    <section class="section event-section">
+      <div class="container narrow reveal">
+        <p class="section-kicker">THE WEDDING</p>
+        <h2 id="eventTitle"></h2>
+        <div class="event-box">
+          <div class="event-icon">✦</div>
+          <p class="event-time" id="eventTime"></p>
+          <p class="event-date" id="eventDate"></p>
+          <h3 id="eventVenue"></h3>
+          <p id="eventAddress"></p>
+          <a class="map-button" id="mapButton" target="_blank" rel="noopener">Xem bản đồ</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section gift-section" id="giftSection">
+      <div class="container narrow reveal">
+        <p class="section-kicker">WEDDING GIFT</p>
+        <h2>Hộp mừng cưới</h2>
+        <p class="body-text">Sự hiện diện của bạn là món quà quý giá nhất. Nếu bạn muốn gửi lời chúc và một chút quà mừng, thông tin bên dưới là dành cho bạn.</p>
+        <div class="gift-card">
+          <div class="qr-wrap"><img id="giftQr" alt="QR mừng cưới"></div>
+          <p class="gift-bank" id="giftBank"></p>
+          <p class="gift-owner" id="giftOwner"></p>
+          <div class="account-row">
+            <strong id="giftAccount"></strong>
+            <button id="copyAccount">Sao chép</button>
+          </div>
+          <span class="copy-status" id="copyStatus"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section final-section">
+      <div class="final-overlay"></div>
+      <div class="container narrow reveal">
+        <div class="ornament">❦</div>
+        <h2 id="footerMessage"></h2>
+        <p class="signature" id="signature"></p>
+      </div>
+    </section>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
