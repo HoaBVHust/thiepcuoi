@@ -4,22 +4,22 @@
  */
 const WEDDING_CONFIG = {
   couple: {
-    groom: "Minh Quân",
-    bride: "Thu Hà",
+    groom: "Văn Hòa Họ Bùi",
+    bride: "Hoài An",
     separator: "♥",
     subtitle: "Trân trọng kính mời bạn đến chung vui cùng chúng tôi"
   },
 
   date: {
-    iso: "2026-05-24T17:30:00+07:00",
-    display: "24 tháng 5, 2026",
-    lunar: "08 tháng 04 năm Bính Ngọ"
+    iso: "2026-11-29T09:30:00+07:00",
+    display: "29 tháng 11, 2026",
+    lunar: "22 tháng 10 năm Bính Ngọ"
   },
 
   cover: {
     image: "assets/images/cover.svg",
     eyebrow: "SAVE THE DATE",
-    title: "Minh Quân & Thu Hà",
+    title: "Bùi Hòa & Hoài An",
     buttonText: "Mở thiệp"
   },
 
@@ -56,7 +56,7 @@ const WEDDING_CONFIG = {
     enabled: true,
     bank: "Vietcombank",
     account: "0123456789",
-    owner: "NGUYEN VAN MINH",
+    owner: "Bùi Văn Hòa",
     qr: "assets/images/qr.svg"
   },
 
