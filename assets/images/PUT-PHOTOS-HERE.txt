@@ -1,0 +1,2 @@
+Đặt photo-01.jpg ... photo-08.jpg tại thư mục này.
+Đặt qr-groom.png và qr-bride.png nếu muốn dùng hộp quà QR.
