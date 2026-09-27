@@ -20,6 +20,24 @@ const WEDDING_CONFIG = {
     time: "09:00",
     title: "LỄ THÀNH HÔN",
     subtitle: "ĐƯỢC CỬ HÀNH TẠI TƯ GIA"
+=======
+    groom: "Văn Hòa Họ Bùi",
+    bride: "Hoài An",
+    separator: "♥",
+    subtitle: "Trân trọng kính mời bạn đến chung vui cùng chúng tôi"
+  },
+
+  date: {
+    iso: "2026-11-29T09:30:00+07:00",
+    display: "29 tháng 11, 2026",
+    lunar: "22 tháng 10 năm Bính Ngọ"
+  },
+
+  cover: {
+    image: "assets/images/cover.svg",
+    eyebrow: "SAVE THE DATE",
+    title: "Bùi Hòa & Hoài An",
+    buttonText: "Mở thiệp"
   },
 
   reception: {
@@ -75,5 +93,14 @@ const WEDDING_CONFIG = {
       owner: "Hoài An",
       qr: "assets/images/qr-bride.png"
     }
+    enabled: true,
+    bank: "Vietcombank",
+    account: "0123456789",
+    owner: "Bùi Văn Hòa",
+    qr: "assets/images/qr.svg"
+  },
+
+  footer: {
+    message: "Cảm ơn bạn đã đến chung vui cùng chúng mình ♥"
   }
 };
