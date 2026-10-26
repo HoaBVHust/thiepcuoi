@@ -1,2 +1,9 @@
-Đặt photo-01.jpg ... photo-08.jpg tại thư mục này.
-Đặt qr-groom.png và qr-bride.png nếu muốn dùng hộp quà QR.
+Đặt ảnh thật vào thư mục này rồi khai báo trong config.js (mảng photos).
+
+Mẹo: mở tools/image-resizer.html bằng trình duyệt để nén ảnh về ~1600px trước khi bỏ vào đây — web sẽ tự xếp kích thước đẹp, không cần chỉnh gì thêm.
+
+File mẫu đang có:
+- gallery-01.svg … gallery-08.svg  → 8 ảnh ví dụ cho album (thay bằng photo-01.jpg… khi có ảnh thật)
+- groom.svg / bride.svg            → ảnh chân dung chú rể / cô dâu
+- final.jpeg                       → ảnh đôi đang dùng ở màn chào
+- qr-groom.svg / qr-bride.svg      → QR minh họa cho hộp quà

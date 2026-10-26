@@ -1,5 +1,44 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1100" viewBox="0 0 900 1100">
-<rect width="900" height="1100" fill="#e7ece5"/>
-<text x="450" y="520" text-anchor="middle" font-family="Georgia" font-size="46" fill="#315d45">CÔ DÂU</text>
-<text x="450" y="580" text-anchor="middle" font-family="Arial" font-size="22" fill="#315d45">Thay bằng ảnh thật</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 1050">
+  <defs>
+    <linearGradient id="bbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f9efe9"/><stop offset="1" stop-color="#fdf9f3"/>
+    </linearGradient>
+    <filter id="bsoft" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="45"/></filter>
+  </defs>
+  <rect width="700" height="1050" fill="url(#bbg)"/>
+  <g filter="url(#bsoft)">
+    <circle cx="140" cy="220" r="120" fill="#e9cec2" opacity=".6"/>
+    <circle cx="570" cy="380" r="110" fill="#a9b79c" opacity=".4"/>
+    <circle cx="140" cy="900" r="130" fill="#c9a86a" opacity=".28"/>
+  </g>
+  <!-- bust silhouette -->
+  <g fill="#40523b">
+    <circle cx="350" cy="430" r="105"/>
+    <circle cx="350" cy="308" r="36"/>
+    <path d="M350 545 C 250 545, 180 625, 176 760 L 524 760 C 520 625, 450 545, 350 545 Z"/>
+  </g>
+  <!-- dress neckline -->
+  <path d="M350 545 C 330 560, 318 590, 316 620 C 338 640, 362 640, 384 620 C 382 590, 370 560, 350 545 Z" fill="#fdf9f3"/>
+  <!-- veil -->
+  <path d="M350 320 C 240 328, 190 430, 198 620 C 240 540, 280 490, 330 460 C 260 540, 236 650, 248 760 L 300 760 C 292 620, 320 500, 350 460 C 380 500, 408 620, 400 760 L 452 760 C 464 650, 440 540, 370 460 C 420 490, 460 540, 502 620 C 510 430, 460 328, 350 320 Z" fill="#e9cec2" opacity=".8"/>
+  <!-- flower on hair -->
+  <g transform="translate(430 366)">
+    <g fill="#e9cec2"><circle cx="0" cy="-14" r="10"/><circle cx="13" cy="-4" r="10"/><circle cx="8" cy="11" r="10"/><circle cx="-8" cy="11" r="10"/><circle cx="-13" cy="-4" r="10"/></g>
+    <circle r="6" fill="#c9a86a"/>
+  </g>
+  <!-- earring -->
+  <circle cx="262" cy="470" r="6" fill="#c9a86a"/>
+  <!-- floral corner -->
+  <g fill="#63785b">
+    <ellipse cx="580" cy="120" rx="30" ry="11" transform="rotate(30 580 120)"/>
+    <ellipse cx="120" cy="920" rx="30" ry="11" transform="rotate(30 120 920)"/>
+  </g>
+  <g transform="translate(612 88)">
+    <g fill="#fdf9f3" stroke="#a9b79c" stroke-width="2"><circle cx="0" cy="-14" r="10"/><circle cx="13" cy="-4" r="10"/><circle cx="8" cy="11" r="10"/><circle cx="-8" cy="11" r="10"/><circle cx="-13" cy="-4" r="10"/></g>
+    <circle r="6" fill="#c9a86a"/>
+  </g>
+  <g transform="translate(88 882)">
+    <g fill="#e9cec2"><circle cx="0" cy="-16" r="11"/><circle cx="15" cy="-5" r="11"/><circle cx="9" cy="13" r="11"/><circle cx="-9" cy="13" r="11"/><circle cx="-15" cy="-5" r="11"/></g>
+    <circle r="7" fill="#c9a86a"/>
+  </g>
 </svg>

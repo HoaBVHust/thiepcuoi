@@ -1,5 +1,44 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1100" viewBox="0 0 900 1100">
-<rect width="900" height="1100" fill="#e7ece5"/>
-<text x="450" y="520" text-anchor="middle" font-family="Georgia" font-size="46" fill="#315d45">ẢNH 04</text>
-<text x="450" y="580" text-anchor="middle" font-family="Arial" font-size="22" fill="#315d45">Thay bằng ảnh thật</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4f7ef"/><stop offset="1" stop-color="#fbf3ee"/>
+    </linearGradient>
+    <filter id="softd" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="55"/></filter>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg4)"/>
+  <g filter="url(#softd)">
+    <circle cx="180" cy="200" r="150" fill="#a9b79c" opacity=".4"/>
+    <circle cx="1050" cy="720" r="160" fill="#e9cec2" opacity=".55"/>
+    <circle cx="960" cy="160" r="110" fill="#c9a86a" opacity=".3"/>
+  </g>
+  <!-- bokeh -->
+  <g filter="url(#softd)" opacity=".7">
+    <circle cx="330" cy="160" r="26" fill="#fdf9f3"/>
+    <circle cx="870" cy="330" r="20" fill="#fdf9f3"/>
+    <circle cx="420" cy="700" r="24" fill="#fdf9f3"/>
+  </g>
+  <!-- two flutes in a toast -->
+  <g transform="translate(520 380) rotate(-14)">
+    <path d="M-38 -160 C -38 -90, -30 -70, -10 -56 L -10 120 L 10 120 L 10 -56 C 30 -70, 38 -160, 38 -160 Z" fill="#fdf9f3" stroke="#a9b79c" stroke-width="3"/>
+    <path d="M-34 -100 C -20 -66, 20 -66, 34 -108 L 34 -160 L -34 -160 Z" fill="#c9a86a" opacity=".75"/>
+    <line x1="0" y1="-52" x2="0" y2="120" stroke="#a9b79c" stroke-width="3"/>
+    <path d="M-26 138 a26 26 0 0 0 52 0" fill="none" stroke="#a9b79c" stroke-width="3"/>
+  </g>
+  <g transform="translate(680 380) rotate(14)">
+    <path d="M-38 -160 C -38 -160, -30 -70, -10 -56 L -10 120 L 10 120 L 10 -56 C 30 -70, 38 -160, 38 -160 Z" fill="#fdf9f3" stroke="#a9b79c" stroke-width="3"/>
+    <path d="M-34 -108 C -20 -66, 20 -66, 34 -66 L 34 -160 L -34 -160 Z" fill="#e9cec2" opacity=".85"/>
+    <line x1="0" y1="-52" x2="0" y2="120" stroke="#a9b79c" stroke-width="3"/>
+    <path d="M-26 138 a26 26 0 0 0 52 0" fill="none" stroke="#a9b79c" stroke-width="3"/>
+  </g>
+  <!-- bubbles -->
+  <g fill="none" stroke="#c9a86a" stroke-width="2" opacity=".8">
+    <circle cx="600" cy="180" r="10"/>
+    <circle cx="560" cy="110" r="6"/>
+    <circle cx="650" cy="90" r="8"/>
+    <circle cx="620" cy="40" r="5"/>
+    <circle cx="700" cy="150" r="6"/>
+  </g>
+  <g font-family="Arial,sans-serif" text-anchor="middle">
+    <text x="600" y="700" font-size="13" letter-spacing="6" fill="#8c9188">NÂNG LY CHÚC MỪNG</text>
+  </g>
 </svg>

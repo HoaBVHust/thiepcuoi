@@ -3,7 +3,18 @@ const WEDDING_CONFIG = {
     groom: "Bùi Hòa",
     bride: "Hoài An",
     groomRole: "Chú Rể",
-    brideRole: "Cô Dâu"
+    brideRole: "Cô Dâu",
+    // Ảnh chân dung chú rể / cô dâu (phần "Hai chúng tôi").
+    // Bất kể ảnh dọc, ngang hay vuông — web tự cắt vừa khung 2:3, không méo.
+    // Đổi thành "assets/images/anh-chu-re.jpg" khi có ảnh thật.
+    groomPhoto: "assets/images/groom.svg",
+    bridePhoto: "assets/images/bride.svg"
+  },
+
+  // Ảnh lớn ở màn chào (hero). Ảnh bất kỳ kích thước nào cũng tự cắt vừa khung vòm 4:5.
+  heroPhoto: {
+    src: "assets/images/final.jpeg",
+    alt: "Hoài An & Bùi Hòa — ảnh đôi bên bờ biển"
   },
 
   date: {
@@ -45,15 +56,30 @@ const WEDDING_CONFIG = {
     }
   },
 
+  /* ======================================================================
+     ALBUM ẢNH — cách thêm ảnh mới:
+     1. Đặt file ảnh vào  assets/images/  (nên nén qua tools/image-resizer.html)
+     2. Thêm 1 dòng vào mảng bên dưới, 2 cách viết đều được:
+
+        Cách 1 — nhanh (chỉ đường dẫn):
+        "assets/images/photo-01.jpg"
+
+        Cách 2 — đầy đủ (có chú thích + ảnh nổi bật):
+        { src: "assets/images/photo-01.jpg", alt: "Chụp ở biển", featured: true }
+
+     - "featured: true"  → ảnh chiếm 2 cột, to hơn các ảnh khác
+     - Web TỰ ĐỘNG đo kích thước ảnh (dọc/ngang/vuông) và xếp lưới đẹp,
+       KHÔNG cần chỉnh gì thêm, ảnh không bao giờ bị méo.
+     ====================================================================== */
   photos: [
-    "assets/images/photo-01.jpg",
-    "assets/images/photo-02.jpg",
-    "assets/images/photo-03.jpg",
-    "assets/images/photo-04.jpg",
-    "assets/images/photo-05.jpg",
-    "assets/images/photo-06.jpg",
-    "assets/images/photo-07.jpg",
-    "assets/images/photo-08.jpg"
+    { src: "assets/images/gallery-01.svg", alt: "Vòm hoa & ngày cưới", featured: true },
+    { src: "assets/images/gallery-02.svg", alt: "Hai chiếc nhẫn" },
+    { src: "assets/images/gallery-03.svg", alt: "Hoa cưới" },
+    { src: "assets/images/gallery-04.svg", alt: "Nâng ly chúc mừng" },
+    { src: "assets/images/gallery-05.svg", alt: "Thư gửi ngày cưới" },
+    { src: "assets/images/gallery-06.svg", alt: "Đường về nhà" },
+    { src: "assets/images/gallery-07.svg", alt: "Tiệc mừng ngày mới" },
+    { src: "assets/images/gallery-08.svg", alt: "Hai chúng tôi" }
   ],
 
   music: {
@@ -67,13 +93,13 @@ const WEDDING_CONFIG = {
       bank: "Ngân hàng",
       account: "0000000000",
       owner: "Bùi Hòa",
-      qr: "assets/images/qr-groom.png"
+      qr: "assets/images/qr-groom.svg"
     },
     bride: {
       bank: "Ngân hàng",
       account: "0000000000",
       owner: "Hoài An",
-      qr: "assets/images/qr-bride.png"
+      qr: "assets/images/qr-bride.svg"
     }
   }
 };

@@ -1,5 +1,46 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1100" viewBox="0 0 900 1100">
-<rect width="900" height="1100" fill="#e7ece5"/>
-<text x="450" y="520" text-anchor="middle" font-family="Georgia" font-size="46" fill="#315d45">ẢNH 06</text>
-<text x="450" y="580" text-anchor="middle" font-family="Arial" font-size="22" fill="#315d45">Thay bằng ảnh thật</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900">
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4f7ef"/><stop offset="1" stop-color="#fdf9f3"/>
+    </linearGradient>
+    <filter id="softf" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="50"/></filter>
+  </defs>
+  <rect width="900" height="900" fill="url(#bg6)"/>
+  <g filter="url(#softf)">
+    <circle cx="700" cy="700" r="160" fill="#a9b79c" opacity=".4"/>
+    <circle cx="200" cy="220" r="140" fill="#e9cec2" opacity=".5"/>
+    <circle cx="740" cy="200" r="100" fill="#c9a86a" opacity=".28"/>
+  </g>
+  <!-- bicycle -->
+  <g stroke="#63785b" stroke-width="7" fill="none" stroke-linecap="round">
+    <circle cx="270" cy="600" r="110"/>
+    <circle cx="630" cy="600" r="110"/>
+    <path d="M270 600 L400 380 L540 380 L630 600"/>
+    <path d="M270 600 L450 600 L400 380"/>
+    <path d="M450 600 L540 380"/>
+    <path d="M540 380 L520 330 L560 322"/>
+  </g>
+  <circle cx="270" cy="600" r="14" fill="#c9a86a"/>
+  <circle cx="630" cy="600" r="14" fill="#c9a86a"/>
+  <circle cx="450" cy="600" r="10" fill="#63785b"/>
+  <!-- seat -->
+  <path d="M368 372 q30 -18 62 0 q-30 14 -62 0 Z" fill="#40523b"/>
+  <!-- basket with flowers -->
+  <g>
+    <path d="M560 420 L660 420 L646 500 L574 500 Z" fill="#c9a86a"/>
+    <path d="M560 420 L660 420 M574 500 L646 500" stroke="#a98d51" stroke-width="2"/>
+    <path d="M585 420 L592 500 M610 420 L612 500 M635 420 L630 500" stroke="#a98d51" stroke-width="1.6" opacity=".7"/>
+    <g fill="#63785b">
+      <ellipse cx="575" cy="404" rx="22" ry="8" transform="rotate(-30 575 404)"/>
+      <ellipse cx="645" cy="404" rx="22" ry="8" transform="rotate(30 645 404)"/>
+    </g>
+    <circle cx="595" cy="396" r="14" fill="#e9cec2"/>
+    <circle cx="625" cy="396" r="14" fill="#fdf9f3" stroke="#a9b79c" stroke-width="2"/>
+    <circle cx="610" cy="384" r="10" fill="#c9a86a"/>
+  </g>
+  <!-- ground line -->
+  <path d="M150 740 h600" stroke="#d9ddd2" stroke-width="3" stroke-linecap="round"/>
+  <g font-family="Arial,sans-serif" text-anchor="middle">
+    <text x="450" y="820" font-size="13" letter-spacing="6" fill="#8c9188">ĐƯỜNG VỀ NHÀ</text>
+  </g>
 </svg>

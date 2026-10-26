@@ -26,6 +26,15 @@
   <section class="cover" id="cover">
     <div class="cover-flower cover-flower-left"></div>
     <div class="cover-flower cover-flower-right"></div>
+    <div class="petals" aria-hidden="true">
+      <i class="petal" style="--x:8%;--delay:0s;--t:16s;--k:1"></i>
+      <i class="petal" style="--x:22%;--delay:4s;--t:19s;--k:.8"></i>
+      <i class="petal" style="--x:38%;--delay:9s;--t:14s;--k:1.15"></i>
+      <i class="petal" style="--x:55%;--delay:2s;--t:18s;--k:.9"></i>
+      <i class="petal" style="--x:70%;--delay:7s;--t:15s;--k:1.05"></i>
+      <i class="petal" style="--x:84%;--delay:11s;--t:20s;--k:.75"></i>
+      <i class="petal" style="--x:93%;--delay:5s;--t:17s;--k:1.1"></i>
+    </div>
     <div class="cover-inner">
       <p class="eyebrow">SAVE THE DATE</p>
       <h1><span id="coverBride">Hoài An</span><b>&amp;</b><span id="coverGroom">Bùi Hòa</span></h1>
@@ -43,6 +52,9 @@
         <h2><span id="heroBride">Hoài An</span><small>&amp;</small><span id="heroGroom">Bùi Hòa</span></h2>
         <div class="thin-line"></div>
         <p>đến chung vui trong ngày trọng đại của chúng tôi</p>
+        <figure class="hero-photo reveal" id="heroPhoto">
+          <img id="heroPhotoImg" alt="Hoài An &amp; Bùi Hòa">
+        </figure>
         <div class="date-card">
           <span id="heroDay">CHỦ NHẬT</span>
           <strong id="heroDayNumber">29</strong>
@@ -183,10 +195,11 @@
   </main>
 
   <div class="lightbox" id="lightbox">
-    <button class="lightbox-close" id="lightboxClose">×</button>
-    <button class="lightbox-prev" id="lightboxPrev">‹</button>
+    <button class="lightbox-close" id="lightboxClose" aria-label="Đóng">×</button>
+    <button class="lightbox-prev" id="lightboxPrev" aria-label="Ảnh trước">‹</button>
     <img id="lightboxImage" alt="Ảnh cưới">
-    <button class="lightbox-next" id="lightboxNext">›</button>
+    <button class="lightbox-next" id="lightboxNext" aria-label="Ảnh sau">›</button>
+    <div class="lightbox-caption" id="lightboxCaption"></div>
     <div class="lightbox-counter" id="lightboxCounter"></div>
   </div>
 

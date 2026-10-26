@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1100">
+  <defs>
+    <linearGradient id="bg8" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4f7ef"/><stop offset="1" stop-color="#fbf3ee"/>
+    </linearGradient>
+    <filter id="softh" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="55"/></filter>
+  </defs>
+  <rect width="900" height="1100" fill="url(#bg8)"/>
+  <g filter="url(#softh)">
+    <circle cx="170" cy="300" r="150" fill="#a9b79c" opacity=".42"/>
+    <circle cx="740" cy="360" r="140" fill="#e9cec2" opacity=".6"/>
+    <circle cx="700" cy="940" r="150" fill="#c9a86a" opacity=".26"/>
+  </g>
+  <!-- two facing bust silhouettes -->
+  <!-- groom, facing right -->
+  <g fill="#40523b">
+    <circle cx="330" cy="470" r="86"/>
+    <path d="M330 560 C 250 560, 196 626, 192 730 L 468 730 C 464 626, 410 560, 330 560 Z"/>
+  </g>
+  <!-- lapel hint -->
+  <path d="M330 560 L302 640 L330 700 L358 640 Z" fill="#63785b" opacity=".55"/>
+  <!-- bow tie -->
+  <path d="M330 585 l-26 -12 v26 Z M330 585 l26 -12 v26 Z" fill="#c9a86a"/>
+  <!-- bride, facing left -->
+  <g fill="#40523b">
+    <circle cx="560" cy="470" r="86"/>
+    <circle cx="560" cy="376" r="30"/>
+    <path d="M560 560 C 640 560, 694 626, 698 730 L 422 730 C 426 626, 480 560, 560 560 Z"/>
+  </g>
+  <!-- veil -->
+  <path d="M560 380 C 470 386, 430 470, 436 620 C 470 560, 500 520, 540 500 C 480 560, 460 640, 470 700 L 500 700 C 496 600, 520 520, 560 480 Z" fill="#e9cec2" opacity=".85"/>
+  <!-- flower on hair -->
+  <g transform="translate(618 412)">
+    <g fill="#e9cec2"><circle cx="0" cy="-14" r="10"/><circle cx="13" cy="-4" r="10"/><circle cx="8" cy="11" r="10"/><circle cx="-8" cy="11" r="10"/><circle cx="-13" cy="-4" r="10"/></g>
+    <circle r="6" fill="#c9a86a"/>
+  </g>
+  <!-- heart between -->
+  <path d="M445 300 C 428 282, 402 292, 402 316 C 402 334, 422 350, 445 364 C 468 350, 488 334, 488 316 C 488 292, 462 282, 445 300 Z" fill="#c9a86a" opacity=".9"/>
+  <!-- florals bottom -->
+  <g fill="#63785b">
+    <ellipse cx="240" cy="780" rx="30" ry="10" transform="rotate(-16 240 780)"/>
+    <ellipse cx="660" cy="780" rx="30" ry="10" transform="rotate(16 660 780)"/>
+  </g>
+  <circle cx="285" cy="768" r="12" fill="#e9cec2"/>
+  <circle cx="615" cy="768" r="12" fill="#e9cec2"/>
+  <g font-family="Arial,sans-serif" text-anchor="middle">
+    <text x="450" y="900" font-size="13" letter-spacing="6" fill="#8c9188">HAI CHÚNG TÔI</text>
+  </g>
+</svg>

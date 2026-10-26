@@ -1,5 +1,46 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1100" viewBox="0 0 900 1100">
-<rect width="900" height="1100" fill="#e7ece5"/>
-<text x="450" y="520" text-anchor="middle" font-family="Georgia" font-size="46" fill="#315d45">ẢNH 05</text>
-<text x="450" y="580" text-anchor="middle" font-family="Arial" font-size="22" fill="#315d45">Thay bằng ảnh thật</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1100">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fdf9f3"/><stop offset="1" stop-color="#f4f7ef"/>
+    </linearGradient>
+    <filter id="softe" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="50"/></filter>
+  </defs>
+  <rect width="900" height="1100" fill="url(#bg5)"/>
+  <g filter="url(#softe)">
+    <circle cx="200" cy="240" r="140" fill="#e9cec2" opacity=".55"/>
+    <circle cx="740" cy="300" r="130" fill="#a9b79c" opacity=".4"/>
+    <circle cx="680" cy="940" r="150" fill="#c9a86a" opacity=".25"/>
+  </g>
+  <!-- envelope -->
+  <g transform="translate(450 520)">
+    <rect x="-230" y="-140" width="460" height="290" rx="10" fill="#fdf9f3" stroke="#a9b79c" stroke-width="2.5"/>
+    <path d="M-230 -140 L0 40 L230 -140" fill="none" stroke="#a9b79c" stroke-width="2.5"/>
+    <path d="M-230 -140 L0 40 L230 -140 L230 -140" fill="#f2ede2" opacity=".6"/>
+    <!-- letter peeking -->
+    <rect x="-150" y="-190" width="300" height="120" rx="6" fill="#fffdf9" stroke="#d9ddd2" stroke-width="2"/>
+    <path d="M-110 -160 h220 M-110 -128 h220 M-110 -96 h140" stroke="#d9ddd2" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+  <!-- wax seal -->
+  <g transform="translate(450 560)">
+    <circle r="46" fill="#c9a86a"/>
+    <circle r="38" fill="none" stroke="#fdf9f3" stroke-width="1.6" opacity=".8"/>
+    <path d="M0 14 C -30 -8, -18 -34, 0 -18 C 18 -34, 30 -8, 0 14 Z" fill="#fdf9f3"/>
+  </g>
+  <!-- eucalyptus sprigs -->
+  <g fill="#a9b79c">
+    <path d="M150 900 C 240 860, 340 856, 430 884" stroke="#63785b" stroke-width="2" fill="none"/>
+    <ellipse cx="200" cy="884" rx="16" ry="7" transform="rotate(-20 200 884)"/>
+    <ellipse cx="260" cy="868" rx="16" ry="7" transform="rotate(-14 260 868)"/>
+    <ellipse cx="320" cy="866" rx="16" ry="7" transform="rotate(-8 320 866)"/>
+    <ellipse cx="380" cy="874" rx="16" ry="7" transform="rotate(-4 380 874)"/>
+  </g>
+  <g fill="#e9cec2">
+    <ellipse cx="600" cy="880" rx="12" ry="6" transform="rotate(20 600 880)"/>
+    <ellipse cx="660" cy="920" rx="14" ry="7" transform="rotate(-16 660 920)"/>
+    <ellipse cx="260" cy="300" rx="12" ry="6" transform="rotate(30 260 300)" opacity=".9"/>
+    <ellipse cx="700" cy="620" rx="12" ry="6" transform="rotate(-24 700 620)" opacity=".9"/>
+  </g>
+  <g font-family="Arial,sans-serif" text-anchor="middle">
+    <text x="450" y="1000" font-size="13" letter-spacing="6" fill="#8c9188">THƯ GỬI NGÀY CƯỚI</text>
+  </g>
 </svg>

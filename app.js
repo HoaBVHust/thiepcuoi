@@ -5,6 +5,7 @@
 
   const set = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value ?? ""; };
   const date = new Date(C.date.iso);
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   document.title = `${C.couple.bride} & ${C.couple.groom} — ${C.date.display}`;
   ["coverBride","heroBride","coupleBride","ceremonyBride","footerBride","giftBride"].forEach(id => set(id,C.couple.bride));
@@ -21,6 +22,28 @@
   set("bankGroom",`${C.gift.groom.bank} · ${C.gift.groom.account} · ${C.gift.groom.owner}`);
   set("bankBride",`${C.gift.bride.bank} · ${C.gift.bride.account} · ${C.gift.bride.owner}`);
   $("#qrGroom").src=C.gift.groom.qr; $("#qrBride").src=C.gift.bride.qr;
+
+  /* Ảnh lớn hero — tự ẩn nếu file chưa có */
+  (function(){
+    const fig=$("#heroPhoto"), img=$("#heroPhotoImg");
+    if(!fig||!img||!C.heroPhoto?.src){fig&&fig.remove();return}
+    img.src=C.heroPhoto.src; img.alt=C.heroPhoto.alt||"";
+    img.onerror=()=>fig.remove();
+  })();
+
+  /* Ảnh chân dung chú rể / cô dâu — tự cắt vừa khung 2:3, ẩn nếu chưa có ảnh */
+  function setPortrait(id,src){
+    const box=document.getElementById(id); if(!box) return;
+    if(!src) return;
+    const img=new Image();
+    img.alt=""; img.decoding="async";
+    img.onload=()=>box.classList.remove("placeholder"); // hiện ảnh, bỏ nền trang trí
+    img.onerror=()=>{img.remove();console.info(`[thiepcuoi] Chưa có ảnh ${id} → giữ nền trang trí`)};
+    img.src=src;
+    box.appendChild(img);
+  }
+  setPortrait("groomPortrait",C.couple.groomPhoto);
+  setPortrait("bridePortrait",C.couple.bridePhoto);
 
   // Music
   const audio=$("#weddingMusic"), music=$("#musicControl");
@@ -48,27 +71,94 @@
     });
     ticking=false;
   }
-  window.addEventListener("scroll",()=>{if(!ticking){requestAnimationFrame(parallax);ticking=true}}, {passive:true});
+  if(!reducedMotion){
+    window.addEventListener("scroll",()=>{if(!ticking){requestAnimationFrame(parallax);ticking=true}}, {passive:true});
+  }
 
-  // Reveal
-  const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible")}),{threshold:.12});
-  $$(".reveal").forEach(el=>observer.observe(el));
+  // Reveal — xuất hiện khi cuộn tới, tự xếp delay so le cho các phần tử con
+  const observer=new IntersectionObserver(entries=>entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add("visible");observer.unobserve(e.target)}
+  }),{threshold:.12});
+  $$(".reveal").forEach((el)=>observer.observe(el));
 
-  // Gallery
-  const gallery=$("#gallery"), photos=C.photos.filter(Boolean);
-  photos.forEach((src,i)=>{
-    const item=document.createElement("div"); item.className="gallery-item";
-    const img=document.createElement("img"); img.src=src; img.loading="lazy"; img.alt=`Ảnh cưới ${i+1}`;
-    img.onerror=()=>{ item.style.background="linear-gradient(135deg,#dfe7d7,#f6f0e5)"; img.style.display="none"; };
-    item.appendChild(img); item.addEventListener("click",()=>openLightbox(i)); gallery.appendChild(item);
+  /* ======================================================================
+     ALBUM ẢNH — masonry tự đo kích thước
+     Mỗi ảnh được đo tỷ lệ thật (dọc/ngang/vuông) rồi tính số hàng cần chiếm,
+     nhờ vậy thêm ảnh mới BẤT KỲ kích thước nào lưới vẫn đẹp, ảnh không méo.
+     Ảnh có featured:true chiếm 2 cột.
+     ====================================================================== */
+  const gallery=$("#gallery");
+  const entries=C.photos.map(p=>typeof p==="string"?{src:p}:p).filter(e=>e&&e.src);
+  const items=[];
+
+  entries.forEach((entry,i)=>{
+    const item=document.createElement("div");
+    item.className="gallery-item";
+    if(entry.featured) item.classList.add("featured");
+    item.style.setProperty("--d",`${Math.min(i%4,3)*90}ms`); // hiệu ứng so le
+
+    const img=document.createElement("img");
+    img.src=entry.src; img.loading="lazy"; img.decoding="async";
+    img.alt=entry.alt||`Ảnh cưới ${i+1}`;
+
+    // Chú thích hiện khi hover
+    const cap=document.createElement("div");
+    cap.className="g-cap";
+    cap.innerHTML=`<em></em><i>${String(i+1).padStart(2,"0")}</i>`;
+    cap.querySelector("em").textContent=entry.alt||"";
+
+    img.addEventListener("load",()=>{ item.classList.add("visible"); layoutMasonry(); });
+    img.onerror=()=>{ item.remove(); console.info(`[thiepcuoi] Không tìm thấy ảnh: ${entry.src}`); };
+
+    item.append(img,cap);
+    item.addEventListener("click",()=>openLightbox(i));
+    gallery.appendChild(item);
+    items.push(item);
   });
-  let current=0; const lb=$("#lightbox"), lbImg=$("#lightboxImage"), counter=$("#lightboxCounter");
-  function openLightbox(i){current=i;lb.classList.add("open");renderLightbox()}
-  function renderLightbox(){lbImg.src=photos[current];counter.textContent=`${current+1} / ${photos.length}`}
-  function next(){current=(current+1)%photos.length;renderLightbox()}
-  function prev(){current=(current-1+photos.length)%photos.length;renderLightbox()}
-  $("#lightboxClose").onclick=()=>lb.classList.remove("open");$("#lightboxNext").onclick=next;$("#lightboxPrev").onclick=prev;
-  document.addEventListener("keydown",e=>{if(!lb.classList.contains("open"))return;if(e.key==="Escape")lb.classList.remove("open");if(e.key==="ArrowRight")next();if(e.key==="ArrowLeft")prev()});
+
+  // Đo và gán số hàng cho từng ảnh theo tỷ lệ thật của nó
+  const ROW=8, GAP=14;
+  function layoutMasonry(){
+    items.forEach(item=>{
+      if(!item.isConnected) return;
+      const w=item.clientWidth;
+      const img=item.querySelector("img");
+      if(!img||!img.naturalWidth) return;
+      const h=w*(img.naturalHeight/img.naturalWidth);
+      const span=Math.max(4,Math.round((h+GAP)/(ROW+GAP)));
+      item.style.setProperty("--s",span);
+    });
+  }
+  let resizeTimer;
+  window.addEventListener("resize",()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(layoutMasonry,120)});
+  window.addEventListener("load",layoutMasonry);
+
+  // Lightbox
+  let current=0; const lb=$("#lightbox"), lbImg=$("#lightboxImage"), counter=$("#lightboxCounter"), caption=$("#lightboxCaption");
+  function openLightbox(i){current=i;lb.classList.add("open");document.body.style.overflow="hidden";renderLightbox()}
+  function renderLightbox(){
+    // reset animation
+    lbImg.style.animation="none"; void lbImg.offsetWidth; lbImg.style.animation="";
+    lbImg.src=entries[current].src;
+    lbImg.alt=entries[current].alt||"Ảnh cưới";
+    counter.textContent=`${current+1} / ${entries.length}`;
+    caption.textContent=entries[current].alt||"";
+  }
+  function next(){current=(current+1)%entries.length;renderLightbox()}
+  function prev(){current=(current-1+entries.length)%entries.length;renderLightbox()}
+  function closeLightbox(){lb.classList.remove("open");document.body.style.overflow=""}
+  $("#lightboxClose").onclick=closeLightbox;$("#lightboxNext").onclick=next;$("#lightboxPrev").onclick=prev;
+  lb.addEventListener("click",e=>{if(e.target===lb)closeLightbox()});
+  document.addEventListener("keydown",e=>{if(!lb.classList.contains("open"))return;if(e.key==="Escape")closeLightbox();if(e.key==="ArrowRight")next();if(e.key==="ArrowLeft")prev()});
+  // Vuốt trên điện thoại
+  let touchX=null;
+  lb.addEventListener("touchstart",e=>touchX=e.touches[0].clientX,{passive:true});
+  lb.addEventListener("touchend",e=>{
+    if(touchX===null)return;
+    const dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>50)(dx<0?next:prev)();
+    touchX=null;
+  },{passive:true});
 
   // Countdown
   const target=date.getTime();
@@ -113,5 +203,5 @@
   $("#giftClose").onclick=()=>$("#giftModal").classList.remove("open");
   $("#giftModal").addEventListener("click",e=>{if(e.target.id==="giftModal")$("#giftModal").classList.remove("open")});
 
-  window.addEventListener("load",()=>setTimeout(()=>$("#loader").classList.add("hide"),450));
+  window.addEventListener("load",()=>{layoutMasonry();setTimeout(()=>$("#loader").classList.add("hide"),450)});
 })();

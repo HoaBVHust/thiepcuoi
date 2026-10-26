@@ -1,5 +1,40 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1100" viewBox="0 0 900 1100">
-<rect width="900" height="1100" fill="#e7ece5"/>
-<text x="450" y="520" text-anchor="middle" font-family="Georgia" font-size="46" fill="#315d45">ẢNH 02</text>
-<text x="450" y="580" text-anchor="middle" font-family="Arial" font-size="22" fill="#315d45">Thay bằng ảnh thật</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fdf9f3"/><stop offset="1" stop-color="#f2ede2"/>
+    </linearGradient>
+    <filter id="softb" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="50"/></filter>
+  </defs>
+  <rect width="900" height="900" fill="url(#bg2)"/>
+  <g filter="url(#softb)">
+    <circle cx="220" cy="680" r="160" fill="#e9cec2" opacity=".55"/>
+    <circle cx="720" cy="220" r="150" fill="#a9b79c" opacity=".4"/>
+    <circle cx="700" cy="720" r="110" fill="#c9a86a" opacity=".3"/>
+  </g>
+  <!-- two interlocked rings -->
+  <g fill="none" stroke-linecap="round">
+    <circle cx="385" cy="470" r="130" stroke="#c9a86a" stroke-width="16"/>
+    <circle cx="515" cy="470" r="130" stroke="#63785b" stroke-width="16"/>
+  </g>
+  <!-- diamond on left ring -->
+  <g transform="translate(385 328)">
+    <path d="M-26 0 L-13 -18 L13 -18 L26 0 L0 30 Z" fill="#fdf9f3" stroke="#c9a86a" stroke-width="3"/>
+    <path d="M-13 -18 L0 0 L13 -18 M-26 0 L26 0 M0 30 L0 0" stroke="#c9a86a" stroke-width="1.6" fill="none"/>
+  </g>
+  <!-- sparkle -->
+  <g stroke="#c9a86a" stroke-width="2.5" stroke-linecap="round">
+    <path d="M640 330 v34 M623 347 h34"/>
+    <path d="M262 620 v22 M251 631 h22" opacity=".7"/>
+  </g>
+  <!-- leaves bottom -->
+  <g fill="#63785b">
+    <ellipse cx="330" cy="640" rx="34" ry="12" transform="rotate(-35 330 640)"/>
+    <ellipse cx="575" cy="640" rx="34" ry="12" transform="rotate(35 575 640)"/>
+    <ellipse cx="450" cy="668" rx="38" ry="12" transform="rotate(6 450 668)" fill="#a9b79c"/>
+  </g>
+  <circle cx="382" cy="622" r="12" fill="#e9cec2"/>
+  <circle cx="520" cy="622" r="12" fill="#e9cec2"/>
+  <g font-family="Arial,sans-serif" text-anchor="middle">
+    <text x="450" y="790" font-size="13" letter-spacing="6" fill="#8c9188">HAI CHIẾC NHẪN · MỘT LỜI HỨA</text>
+  </g>
 </svg>

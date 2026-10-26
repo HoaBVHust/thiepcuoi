@@ -1,35 +1,51 @@
 # Thiệp cưới Hoài An & Bùi Hòa
 
-Bộ template HTML/CSS/JS thuần, dựng lại theo phong cách demo Hoa Mộc Xanh:
-- Nền kem + xanh lá
-- Hoa watercolor
-- Parallax khi cuộn
-- Mở thiệp
-- Nhạc nền
-- Couple/family/ceremony/reception
-- Album + lightbox
-- Countdown
-- Lịch tháng
-- RSVP
-- Google Maps
-- Timeline
-- Sổ lưu bút lưu localStorage
-- Hộp quà QR
-
-## Quan trọng
-Source CSS/JS và file nhạc gốc của demo ChungDoi không được public qua crawler ở dạng có thể lấy nguyên file, nên bộ này là implementation riêng, không phải bản sao source của ChungDoi.
+Bộ template HTML/CSS/JS thuần, phong cách hiện đại tối giản:
+- Nền kem + xanh lá, hoa watercolor, cánh hoa bay trên bìa
+- Cỡ chữ "co giãn" mượt theo màn hình (fluid typography, không cần chỉnh tay)
+- Mở thiệp + nhạc nền
+- Couple / family / ceremony / reception
+- Album **masonry tự đo kích thước ảnh** + hiệu ứng hover + lightbox (có vuốt trên điện thoại)
+- Ảnh chân dung khung vòm, hiệu ứng xuất hiện khi cuộn
+- Countdown, lịch tháng, RSVP, Google Maps, timeline, sổ lưu bút, hộp quà QR
 
 ## Thay thông tin
 Chỉ sửa `config.js`.
 
-## Thay ảnh
-Đặt ảnh vào `assets/images/`, sau đó sửa mảng `photos` trong `config.js`.
+## Thay ảnh — web tự co giãn mọi kích thước
+
+1. *(Khuyên dùng)* Mở `tools/image-resizer.html` bằng trình duyệt → kéo ảnh vào → tải bản đã nén (~1600px, vài trăm KB).
+2. Đặt ảnh vào `assets/images/`.
+3. Sửa mảng `photos` trong `config.js` — 2 cách viết:
+
+```js
+photos: [
+  "assets/images/photo-01.jpg",                              // cách nhanh
+  { src: "assets/images/photo-01.jpg", alt: "Chụp ở biển" }, // có chú thích
+  { src: "assets/images/photo-02.jpg", alt: "Ảnh chính", featured: true }, // to gấp đôi
+]
+```
+
+Ảnh dọc, ngang hay vuông đều được: web **tự đo tỷ lệ ảnh thật** và xếp lưới đẹp,
+ảnh **không bao giờ bị méo** — không cần chỉnh CSS gì thêm.
+
+### Ảnh chân dung chú rể / cô dâu
+Đổi `couple.groomPhoto` / `couple.bridePhoto` trong `config.js` sang file của bạn
+(nên dùng ảnh **dọc**, khung 2:3 — web sẽ tự cắt vừa khung vòm).
+
+### Ảnh lớn màn chào (hero)
+Đổi `heroPhoto.src` trong `config.js`. Ảnh tự cắt vừa khung 4:5.
 
 ## Thay nhạc
 Đặt file MP3 vào `assets/music/wedding.mp3`.
 
 ## Thay QR
-Đặt `qr-groom.png` và `qr-bride.png` vào `assets/images/`.
+Đặt `qr-groom.png` và `qr-bride.png` vào `assets/images/`, rồi sửa `gift.*.qr` trong `config.js`.
+
+## Font chữ
+- `--script` (Beau Rivage) dùng cho tên — hiển thị tốt dấu tiếng Việt cơ bản (à, è, ù, ò…).
+  Nếu tên có dấu phức tạp (ệ, ẫ, ể…) hiển thị lỗi, đổi trong `style.css`:
+  `--script:"Dancing Script",cursive` (font này hỗ trợ đầy đủ tiếng Việt).
 
 ## Deploy
 Push toàn bộ thư mục lên GitHub, sau đó kết nối repository với Cloudflare Pages.
