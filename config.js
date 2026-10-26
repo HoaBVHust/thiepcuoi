@@ -40,7 +40,7 @@ const WEDDING_CONFIG = {
     address: "Thôn Kim Thượng, xã Đa Phúc, thành phố Hà Nội",
     // Tọa độ chính xác vị trí tiệc (lấy từ Google Maps) — bản đồ ghim đúng tới từng mét
     coords: "21.20466, 105.9066",
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=21.2042395%2C105.9046148"
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=21.20466%2C%20105.9066"
   },
 
   family: {

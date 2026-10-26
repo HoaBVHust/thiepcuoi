@@ -54,13 +54,41 @@
   async function toggleMusic(){ if(!audio.src)return; try{ if(audio.paused){await audio.play();music.classList.add("playing");musicStarted=true}else{audio.pause();music.classList.remove("playing")} }catch(e){ console.info("Music file chưa có:",e.message); } }
   music.addEventListener("click",toggleMusic);
 
-  // Open invitation
+  // Open invitation — lướt nhanh xuống thiệp, bật nhạc, rồi tự cuộn chậm
   $("#openInvitation").addEventListener("click", async () => {
     $("#cover").classList.add("opened");
     document.body.classList.add("invitation-open");
-    window.scrollTo({top:0,behavior:"smooth"});
     if(C.music.enabled && C.music.autoplayAfterOpen && !musicStarted) await toggleMusic();
+    const heroY=$(".hero").getBoundingClientRect().top+window.scrollY;
+    window.scrollTo({top:heroY,behavior:"smooth"}); // chuyển nhanh xuống trang thiệp
+    setTimeout(startAutoScroll,1800);               // sau đó tự cuộn chậm ngắm thiệp
   });
+
+  /* Tự cuộn chậm — dừng ngay khi khách chạm/cuộn/tương tác bất cứ lúc nào */
+  let autoScrollRAF=null,autoScrollActive=false,lastUserScroll=0;
+  ["touchstart","wheel","keydown","pointerdown"].forEach(ev=>
+    window.addEventListener(ev,e=>{
+      // bỏ qua tương tác trên chính nút "MỞ THIỆP" (khi đó auto-scroll mới được phép chạy)
+      if(e.target&&e.target.closest&&e.target.closest("#openInvitation"))return;
+      lastUserScroll=Date.now();
+      if(autoScrollActive)stopAutoScroll();
+    },{passive:true}));
+  function stopAutoScroll(){autoScrollActive=false;if(autoScrollRAF){cancelAnimationFrame(autoScrollRAF);autoScrollRAF=null}}
+  function startAutoScroll(){
+    if(reducedMotion||autoScrollActive)return;
+    if(Date.now()-lastUserScroll<2500)return; // khách vừa tự tương tác → không cuộn hộ
+    autoScrollActive=true;
+    let last=performance.now();
+    const step=(now)=>{
+      if(!autoScrollActive)return;
+      const dt=Math.min(64,now-last);last=now;
+      const maxY=document.documentElement.scrollHeight-window.innerHeight-4;
+      if(window.scrollY>=maxY){stopAutoScroll();return}
+      window.scrollBy(0,0.085*dt); // ≈ 85px/giây — vừa đủ ngắm
+      autoScrollRAF=requestAnimationFrame(step);
+    };
+    autoScrollRAF=requestAnimationFrame(step);
+  }
 
   // Parallax
   const floral=$$(".floral,.cover-flower,.hero-flower,.footer-flower");
@@ -183,10 +211,18 @@
   const end=start;
   $("#calendarLink").href=`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(C.couple.bride+" & "+C.couple.groom+" - Ngày cưới")}&dates=${start}T020000Z/${end}T140000Z&details=${encodeURIComponent("Ngày cưới của "+C.couple.bride+" & "+C.couple.groom)}&location=${encodeURIComponent(C.reception.address)}`;
 
-  // Map — ưu tiên tọa độ (reception.coords) để ghim chính xác, fallback sang địa chỉ chữ
+  // Map — nhúng OpenStreetMap theo tọa độ (không bị Google chặn như iframe maps
+  // trên một số mạng/điện thoại); nút "Chỉ đường" vẫn mở Google Maps app
   $("#mapsLink").href=C.reception.mapsUrl;
-  const mapQuery=C.reception.coords||C.reception.address;
-  $("#mapFrame").src=`https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`;
+  (function(){
+    const m=(C.reception.coords||"").split(",").map(s=>Number(s.trim()));
+    if(m.length>=2&&isFinite(m[0])&&isFinite(m[1])){
+      const lat=m[0],lng=m[1],d=0.01; // khung nhìn ~2km quanh điểm tiệc
+      $("#mapFrame").src=`https://www.openstreetmap.org/export/embed.html?bbox=${(lng-d).toFixed(5)}%2C${(lat-d).toFixed(5)}%2C${(lng+d).toFixed(5)}%2C${(lat+d).toFixed(5)}&layer=mapnik&marker=${lat}%2C${lng}`;
+    }else{
+      $("#mapFrame").src=`https://www.google.com/maps?q=${encodeURIComponent(C.reception.address)}&output=embed`;
+    }
+  })();
 
   // RSVP — gửi về Google Sheet (nếu đã cấu hình appsScriptUrl), kèm honeypot chống bot
   const rsvpNote=$("#rsvpNote"), rsvpStats=$("#rsvpStats");

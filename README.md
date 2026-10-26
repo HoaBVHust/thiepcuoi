@@ -55,5 +55,9 @@ Không cấu hình thì web vẫn chạy nhưng dữ liệu chỉ lưu tạm tr�
   Nếu tên có dấu phức tạp (ệ, ẫ, ể…) hiển thị lỗi, đổi trong `style.css`:
   `--script:"Dancing Script",cursive` (font này hỗ trợ đầy đủ tiếng Việt).
 
+## Xem thử trên máy
+Chạy: `python tools/dev-server.py` → mở `http://localhost:8644`
+(server này không lưu cache — luôn hiển thị bản sửa mới nhất; server Python thường có thể giữ bản cũ trong cache trình duyệt).
+
 ## Deploy
 Push toàn bộ thư mục lên GitHub, sau đó kết nối repository với Cloudflare Pages.
