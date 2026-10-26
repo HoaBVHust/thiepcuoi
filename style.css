@@ -282,7 +282,19 @@ h1,h2,h3,h4{text-wrap:balance}
   border-color:var(--sage);box-shadow:0 0 0 3px rgba(169,183,156,.22);
 }
 .form-card textarea{resize:vertical}
+/* honeypot chống bot — ẩn khỏi màn hình & trình đọc màn hình */
+.hp-field,.form-card .hp-field{
+  position:absolute!important;left:-9999px!important;top:0;
+  height:1px!important;width:1px!important;padding:0!important;border:0!important;
+  opacity:0;pointer-events:none;
+}
 .local-note{text-align:center;color:var(--muted);font-size:.68rem;margin-top:18px;letter-spacing:.04em}
+.rsvp-stats{
+  text-align:center;font:italic 400 .95rem var(--serif);color:var(--green);
+  margin:14px 0 0;letter-spacing:.02em;
+}
+.rsvp-stats:empty{display:none}
+.wishes-empty{text-align:center;color:var(--muted);font-size:.72rem;letter-spacing:.06em}
 
 /* ---------- Địa điểm ---------- */
 .venue{text-align:center}

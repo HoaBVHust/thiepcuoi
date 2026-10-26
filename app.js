@@ -4,6 +4,8 @@
   const $$ = (s) => [...document.querySelectorAll(s)];
 
   const set = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value ?? ""; };
+  const escapeHtml = (s) => String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
+  const SHEET = (C.appsScriptUrl||"").trim(); // URL Apps Script — rỗng = chế độ demo
   const date = new Date(C.date.iso);
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -181,22 +183,78 @@
   const end=start;
   $("#calendarLink").href=`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(C.couple.bride+" & "+C.couple.groom+" - Ngày cưới")}&dates=${start}T020000Z/${end}T140000Z&details=${encodeURIComponent("Ngày cưới của "+C.couple.bride+" & "+C.couple.groom)}&location=${encodeURIComponent(C.reception.address)}`;
 
-  // Map
+  // Map — ưu tiên tọa độ (reception.coords) để ghim chính xác, fallback sang địa chỉ chữ
   $("#mapsLink").href=C.reception.mapsUrl;
-  $("#mapFrame").src=`https://www.google.com/maps?q=${encodeURIComponent(C.reception.address)}&output=embed`;
+  const mapQuery=C.reception.coords||C.reception.address;
+  $("#mapFrame").src=`https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`;
 
-  // RSVP local demo
-  $("#rsvpForm").addEventListener("submit",e=>{e.preventDefault();$("#rsvpNote").textContent="Đã ghi nhận trên trình duyệt này. Khi deploy thật, bạn có thể nối form vào Google Sheets/Formspree.";e.target.reset()});
+  // RSVP — gửi về Google Sheet (nếu đã cấu hình appsScriptUrl), kèm honeypot chống bot
+  const rsvpNote=$("#rsvpNote"), rsvpStats=$("#rsvpStats");
+  const note=(t)=>{if(rsvpNote)rsvpNote.textContent=t};
+  $("#rsvpForm").addEventListener("submit", async e=>{
+    e.preventDefault();
+    const f=new FormData(e.target);
+    if(f.get("website")){ e.target.reset(); note("Cảm ơn bạn! 💐"); return; } // honeypot: bot điền → bỏ qua lặng lẽ
+    const data={type:"rsvp",name:f.get("name"),attendance:f.get("attendance"),guests:f.get("guests"),note:f.get("note")};
+    if(SHEET){
+      note("Đang gửi xác nhận…");
+      try{
+        const r=await fetch(SHEET,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(data)});
+        const j=await r.json();
+        if(j.ok){ note(`Cảm ơn ${data.name}! Xác nhận của bạn đã được ghi nhận 💐`); e.target.reset(); loadWishes(); return; }
+        note("Có lỗi khi ghi nhận: "+(j.error||"không rõ")+". Bạn vui lòng thử lại.");
+      }catch(err){ note("Không gửi được lúc này (có thể do mạng chặn Google). Bạn vui lòng thử lại sau nhé."); }
+    }else{
+      note("Đã ghi nhận trên trình duyệt này (chế độ demo). Khi có appsScriptUrl trong config.js, dữ liệu sẽ lưu vào Google Sheet.");
+      e.target.reset();
+    }
+  });
 
-  // Guestbook localStorage
-  const wishes=$("#wishes"), key="wedding-wishes";
-  function renderWishes(){
-    const data=JSON.parse(localStorage.getItem(key)||"[]");
-    wishes.innerHTML=data.length?data.map(x=>`<article class="wish"><strong>${escapeHtml(x.name)}</strong><p>${escapeHtml(x.message)}</p></article>`).join(""):"<p style='text-align:center;color:#999;font-size:11px'>Chưa có lời chúc nào. Hãy là người đầu tiên!</p>";
+  // Sổ lưu bút — lưu vào Google Sheet; chưa cấu hình thì lưu localStorage (demo)
+  const wishes=$("#wishes"), wishKey="wedding-wishes";
+  function renderWishList(list){
+    wishes.innerHTML=list.length
+      ?list.slice(0,40).map(x=>`<article class="wish"><strong>${escapeHtml(x.name)}</strong><p>${escapeHtml(x.message)}</p></article>`).join("")
+      :"<p class='wishes-empty'>Chưa có lời chúc nào. Hãy là người đầu tiên!</p>";
   }
-  function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]))}
-  $("#wishForm").addEventListener("submit",e=>{e.preventDefault();const f=new FormData(e.target);const data=JSON.parse(localStorage.getItem(key)||"[]");data.unshift({name:f.get("name"),message:f.get("message")});localStorage.setItem(key,JSON.stringify(data.slice(0,30)));e.target.reset();renderWishes()});
-  renderWishes();
+  function updateStats(j){
+    if(rsvpStats&&j&&typeof j.guestCount==="number")
+      rsvpStats.textContent=j.guestCount>0?`💌 ${j.rsvpCount} lượt xác nhận · ${j.guestCount} khách sẽ tham dự`:"";
+  }
+  async function loadWishes(){
+    if(SHEET){
+      try{
+        const r=await fetch(SHEET,{cache:"no-store"});
+        const j=await r.json();
+        if(j.ok){ renderWishList(j.wishes); updateStats(j); return; }
+      }catch(e){ /* mạng chặn Google → rơi xuống chế độ demo */ }
+      wishes.innerHTML="<p class='wishes-empty'>Chưa tải được lời chúc lúc này — thử tải lại trang nhé.</p>";
+      return;
+    }
+    renderWishList(JSON.parse(localStorage.getItem(wishKey)||"[]"));
+  }
+  $("#wishForm").addEventListener("submit", async e=>{
+    e.preventDefault();
+    const f=new FormData(e.target);
+    if(f.get("website")){ e.target.reset(); return; } // honeypot
+    const data={type:"wish",name:f.get("name"),message:f.get("message")};
+    if(SHEET){
+      const btn=e.target.querySelector("button"); if(btn)btn.disabled=true;
+      try{
+        const r=await fetch(SHEET,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(data)});
+        const j=await r.json();
+        if(j.ok){ e.target.reset(); await loadWishes(); } else { note("Lưu lời chúc bị lỗi: "+(j.error||"?")); }
+      }catch(err){ note("Không gửi được lời chúc lúc này — thử lại sau nhé."); }
+      finally{ if(btn)btn.disabled=false; }
+      return;
+    }
+    // chế độ demo
+    const local=JSON.parse(localStorage.getItem(wishKey)||"[]");
+    local.unshift({name:data.name,message:data.message});
+    localStorage.setItem(wishKey,JSON.stringify(local.slice(0,30)));
+    e.target.reset(); renderWishList(local);
+  });
+  loadWishes();
 
   // Gift modal
   $("#giftOpen").onclick=()=>$("#giftModal").classList.add("open");

@@ -37,8 +37,10 @@ const WEDDING_CONFIG = {
     guestTime: "17:30",
     startTime: "18:00",
     venue: "Tiệc Cưới",
-    address: "Địa chỉ tiệc cưới sẽ cập nhật",
-    mapsUrl: "https://maps.google.com/"
+    address: "Thôn Kim Thượng, xã Đa Phúc, thành phố Hà Nội",
+    // Tọa độ chính xác vị trí tiệc (lấy từ Google Maps) — bản đồ ghim đúng tới từng mét
+    coords: "21.20466, 105.9066",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=21.2042395%2C105.9046148"
   },
 
   family: {
@@ -81,6 +83,15 @@ const WEDDING_CONFIG = {
     { src: "assets/images/gallery-07.svg", alt: "Tiệc mừng ngày mới" },
     { src: "assets/images/gallery-08.svg", alt: "Hai chúng tôi" }
   ],
+
+  /* ======================================================================
+     LƯU DỮ LIỆU KHÁCH MỜI (RSVP + sổ lưu bút) vào Google Sheet
+     Làm theo docs/HUONG-DAN-GOOGLE-SHEET.md rồi dán Web app URL vào đây
+     (chuỗi kết thúc bằng /exec).
+     Để trống "" → web chạy chế độ demo: dữ liệu chỉ lưu trên trình duyệt
+     của khách, KHÔNG có nơi tổng hợp. Nhớ điền trước khi deploy thật!
+     ====================================================================== */
+  appsScriptUrl: "",
 
   music: {
     enabled: true,

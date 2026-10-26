@@ -142,13 +142,15 @@
     <section class="rsvp section reveal">
       <div class="section-heading"><span>RSVP</span><h3>Xác nhận tham dự</h3></div>
       <form id="rsvpForm" class="form-card">
+        <input class="hp-field" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
         <input required name="name" placeholder="Tên của bạn *">
         <select name="attendance"><option value="yes">Tôi sẽ tham dự</option><option value="no">Tôi không thể tham dự</option></select>
         <input name="guests" type="number" min="1" value="1" placeholder="Số người">
         <textarea name="note" rows="3" placeholder="Lời nhắn"></textarea>
         <button type="submit">GỬI XÁC NHẬN</button>
       </form>
-      <p class="local-note" id="rsvpNote">Biểu mẫu đang chạy cục bộ. Có thể nối Formspree/Google Sheets sau.</p>
+      <p class="local-note" id="rsvpNote"></p>
+      <p class="rsvp-stats" id="rsvpStats"></p>
     </section>
 
     <section class="venue section reveal">
@@ -162,10 +164,10 @@
     <section class="timeline section reveal">
       <div class="section-heading"><span>SCHEDULE</span><h3>Lịch trình ngày cưới</h3></div>
       <ol>
-        <li><time>17:30</time><span>Đón khách</span></li>
-        <li><time>18:00</time><span>Khai tiệc</span></li>
-        <li><time>18:30</time><span>Rót rượu, cắt bánh</span></li>
-        <li><time>19:00</time><span>Phục vụ món chính</span></li>
+        <li><time>16:00</time><span>Đón khách</span></li>
+        <li><time>16:30</time><span>Khai tiệc</span></li>
+        <li><time>17:00</time><span>Rót rượu, cắt bánh</span></li>
+        <li><time>17:00</time><span>Phục vụ món chính</span></li>
         <li><time>21:00</time><span>Kết thúc tiệc</span></li>
       </ol>
     </section>
@@ -173,6 +175,7 @@
     <section class="guestbook section reveal">
       <div class="section-heading"><span>GUESTBOOK</span><h3>Sổ lưu bút</h3></div>
       <form id="wishForm" class="form-card">
+        <input class="hp-field" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
         <input required name="name" placeholder="Nhập tên của bạn *">
         <textarea required name="message" rows="4" placeholder="Gửi lời chúc"></textarea>
         <button type="submit">GỬI LỜI CHÚC</button>

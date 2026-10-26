@@ -39,6 +39,14 @@ photos: [
 ## Thay nhạc
 Đặt file MP3 vào `assets/music/wedding.mp3`.
 
+## Lưu RSVP & sổ lưu bút vào Google Sheet (quan trọng trước khi deploy)
+
+Làm theo **`docs/HUONG-DAN-GOOGLE-SHEET.md`** (≈15 phút, làm 1 lần):
+tạo Google Sheet → dán mã sẵn có trong `tools/apps-script-code.gs` → deploy →
+dán Web app URL vào `appsScriptUrl` trong `config.js`.
+
+Không cấu hình thì web vẫn chạy nhưng dữ liệu chỉ lưu tạm trên trình duyệt của khách.
+
 ## Thay QR
 Đặt `qr-groom.png` và `qr-bride.png` vào `assets/images/`, rồi sửa `gift.*.qr` trong `config.js`.
 
