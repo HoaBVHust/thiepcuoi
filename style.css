@@ -396,32 +396,59 @@ h1,h2,h3,h4{text-wrap:balance}
 }
 .blackhole:focus-visible{outline:2px solid var(--gold);outline-offset:10px;border-radius:50%}
 .bh-core{
-  position:absolute;inset:24%;border-radius:50%;z-index:2;
-  background:radial-gradient(circle at 36% 32%,#2a2a44,#05050d 55%,#000 72%);
-  box-shadow:0 0 0 1.5px rgba(255,230,180,.28),0 0 34px 8px rgba(255,214,140,.24),inset 0 0 26px rgba(0,0,0,.9);
+  position:absolute;inset:22%;border-radius:50%;z-index:2;
+  background:radial-gradient(circle at 38% 30%,#1c1c30,#02020a 45%,#000 66%);
+  box-shadow:0 0 34px 8px rgba(255,214,140,.22),inset 0 0 26px rgba(0,0,0,.9);
   animation:bh-breathe 4.5s ease-in-out infinite;
+}
+/* vòng photon — ánh sáng bị bẻ cong ôm sát chân trời sự kiện */
+.bh-core::before{
+  content:"";position:absolute;inset:-3%;border-radius:50%;
+  background:radial-gradient(circle,transparent 56%,rgba(255,242,214,.85) 63%,rgba(255,206,140,.35) 69%,transparent 76%);
+  filter:blur(1.5px);animation:bh-ring 4.5s ease-in-out infinite;
 }
 .bh-tilt{
   position:absolute;left:50%;top:50%;width:120%;height:120%;pointer-events:none;
   transform:translate(-50%,-50%) rotate(-14deg) scaleY(.34);
+  animation:bh-sway 9s ease-in-out infinite;
 }
-.bh-tilt-back{z-index:1}
-.bh-tilt-front{z-index:3}
+.bh-tilt-back{z-index:1;animation-duration:12s;animation-delay:-4s}
+.bh-tilt-front{z-index:3;animation-duration:9s}
 .bh-disk{
-  display:block;width:100%;height:100%;border-radius:50%;filter:blur(3px);
-  background:conic-gradient(from 0deg,transparent 0 8%,rgba(255,224,158,.95) 16%,rgba(255,178,112,.55) 27%,transparent 40%,rgba(168,138,255,.72) 58%,rgba(255,224,158,.85) 72%,transparent 86%);
-  -webkit-mask:radial-gradient(closest-side,transparent 24%,#000 34%);
-  mask:radial-gradient(closest-side,transparent 24%,#000 34%);
-  animation:bh-spin 7s linear infinite;
+  display:block;width:100%;height:100%;border-radius:50%;filter:blur(4px);opacity:.92;
+  /* gradient liên tục, không nét đứt — vật chất đáy đĩa chảy quanh hố đen */
+  background:conic-gradient(from 0deg,
+    rgba(255,232,190,.85),rgba(255,186,116,.4) 9%,rgba(255,238,205,.95) 21%,
+    rgba(196,152,255,.5) 38%,rgba(255,214,150,.8) 54%,rgba(255,150,92,.42) 69%,
+    rgba(255,238,205,.9) 84%,rgba(255,232,190,.85));
+  animation:bh-spin 9s linear infinite;
 }
-.bh-tilt-back .bh-disk{animation-duration:9.5s;animation-direction:reverse;opacity:.55}
+/* mặt sau (halo phía sau chân trời): lỗ nhỏ, bị mặt cầu che phần giữa */
+.bh-tilt-back .bh-disk{
+  animation-duration:12.5s;animation-direction:reverse;opacity:.5;filter:blur(5px);
+  -webkit-mask:radial-gradient(closest-side,transparent 23%,#000 32%);
+  mask:radial-gradient(closest-side,transparent 23%,#000 32%);
+}
+/* mặt trước: lỗ elip có TÍNH both độ nén scaleY(.34) — trên màn hình lỗ tròn
+   vừa khít chân trời sự kiện (mặt cầu r≈45% nửa hộp / 0.34 ≈ 25%×69%),
+   đĩa ôm sát quanh chân trời như ánh sáng bị bẫy, mặt cầu giữ đen sâu */
+.bh-tilt-front .bh-disk{
+  -webkit-mask:radial-gradient(25% 69% at 50% 50%,transparent 92%,#000 100%);
+  mask:radial-gradient(25% 69% at 50% 50%,transparent 92%,#000 100%);
+}
 .bh-glow{
   position:absolute;inset:4%;border-radius:50%;z-index:1;pointer-events:none;
   background:radial-gradient(circle,rgba(255,214,150,.15),rgba(150,120,255,.09) 55%,transparent 72%);
   animation:bh-glow 5s ease-in-out infinite;
 }
 @keyframes bh-spin{to{rotate:360deg}}
-@keyframes bh-breathe{50%{box-shadow:0 0 56px 15px rgba(255,214,140,.36),inset 0 0 26px rgba(0,0,0,.9)}}
+@keyframes bh-breathe{50%{box-shadow:0 0 56px 15px rgba(255,214,140,.34),inset 0 0 26px rgba(0,0,0,.9)}}
+@keyframes bh-ring{50%{opacity:.6}}
+/* đĩa lượn nhẹ như đang chảy trong không gian, không khô cứng */
+@keyframes bh-sway{
+  0%,100%{transform:translate(-50%,-50%) rotate(-14.5deg) scaleY(.34)}
+  50%{transform:translate(-50%,-50%) rotate(-12.5deg) scaleY(.375)}
+}
 @keyframes bh-glow{50%{opacity:.5;scale:1.07}}
 
 /* Big Bang khi chạm hố đen */
@@ -543,6 +570,8 @@ h1,h2,h3,h4{text-wrap:balance}
   .family-grid{grid-template-columns:1fr}
   .timeline li{grid-template-columns:78px 1fr;padding-left:22px}
   .reception-meta{gap:16px}
+  /* nút chỉ đường trên bản đồ nhỏ gọn lại cho vừa điện thoại */
+  .map-btn{font-size:.56rem;padding:.7em 1.35em;letter-spacing:.12em;bottom:12px;box-shadow:0 6px 14px rgba(29,36,29,.22)}
   .gift-grid{grid-template-columns:1fr;max-height:72vh;overflow:auto}
   .gift-modal h3{top:14px;font-size:1.4rem}
   .bank-card img{width:140px;height:140px}

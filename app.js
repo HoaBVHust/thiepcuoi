@@ -55,10 +55,11 @@
   music.addEventListener("click",toggleMusic);
 
   // Open invitation — lướt nhanh xuống thiệp, bật nhạc, rồi tự cuộn chậm
-  $("#openInvitation").addEventListener("click", async () => {
+  $("#openInvitation").addEventListener("click", () => {
     $("#cover").classList.add("opened");
     document.body.classList.add("invitation-open");
-    if(C.music.enabled && C.music.autoplayAfterOpen && !musicStarted) await toggleMusic();
+    // nhạc chạy độc lập — KHÔNG await, để play() treo cũng không chặn việc cuộn
+    if(C.music.enabled && C.music.autoplayAfterOpen && !musicStarted) toggleMusic();
     const heroY=$(".hero").getBoundingClientRect().top+window.scrollY;
     window.scrollTo({top:heroY,behavior:"smooth"}); // chuyển nhanh xuống trang thiệp
     setTimeout(startAutoScroll,1800);               // sau đó tự cuộn chậm ngắm thiệp
@@ -73,18 +74,32 @@
       lastUserScroll=Date.now();
       if(autoScrollActive)stopAutoScroll();
     },{passive:true}));
-  function stopAutoScroll(){autoScrollActive=false;if(autoScrollRAF){cancelAnimationFrame(autoScrollRAF);autoScrollRAF=null}}
+  function stopAutoScroll(){
+    autoScrollActive=false;
+    if(autoScrollRAF){cancelAnimationFrame(autoScrollRAF);autoScrollRAF=null}
+    document.documentElement.style.scrollBehavior=""; // trả lại smooth cho các cú nhảy anchor
+  }
   function startAutoScroll(){
     if(reducedMotion||autoScrollActive)return;
     if(Date.now()-lastUserScroll<2500)return; // khách vừa tự tương tác → không cuộn hộ
     autoScrollActive=true;
-    let last=performance.now();
+    const html=document.documentElement;
+    // QUAN TRỌNG: html đang có scroll-behavior:smooth — nếu để vậy, mỗi scrollBy từng frame
+    // lại kích hoạt một animation smooth mới => giật lag. Tắt trong lúc cuộn hộ.
+    html.style.scrollBehavior="auto";
+    const maxY=()=>html.scrollHeight-window.innerHeight-4;
+    // tốc độ theo độ dài trang: trọn thiệp ~60s, giới hạn 150–260px/s
+    const dist=Math.max(1,maxY()-window.scrollY);
+    const speed=Math.min(0.26,Math.max(0.15,dist/60000));
+    const t0=performance.now();
+    let last=t0;
     const step=(now)=>{
       if(!autoScrollActive)return;
       const dt=Math.min(64,now-last);last=now;
-      const maxY=document.documentElement.scrollHeight-window.innerHeight-4;
-      if(window.scrollY>=maxY){stopAutoScroll();return}
-      window.scrollBy(0,0.085*dt); // ≈ 85px/giây — vừa đủ ngắm
+      if(window.scrollY>=maxY()){stopAutoScroll();return}
+      const r=Math.min(1,(now-t0)/2000);      // 2s đầu tăng tốc dần từ 35% tốc độ
+      const ramp=0.35+0.65*r*r*(3-2*r);       // smoothstep — khởi động mềm, không giật
+      window.scrollBy(0,speed*ramp*dt);
       autoScrollRAF=requestAnimationFrame(step);
     };
     autoScrollRAF=requestAnimationFrame(step);

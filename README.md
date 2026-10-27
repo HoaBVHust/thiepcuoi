@@ -1,13 +1,14 @@
 # Thiệp cưới Hoài An & Bùi Hòa
 
 Bộ template HTML/CSS/JS thuần, phong cách hiện đại tối giản:
-- Nền kem + xanh lá, hoa watercolor, cánh hoa bay trên bìa
+- Theme **"bầu trời đêm"** toàn trang: tinh vân + dải ngân hà + sao nhấp nháy (SVG tự vẽ, không phụ thuộc mạng), sao băng bay qua khi lướt tới từng mục
 - Cỡ chữ "co giãn" mượt theo màn hình (fluid typography, không cần chỉnh tay)
-- Mở thiệp + nhạc nền
+- Mở thiệp: lướt xuống thiệp, bật nhạc, rồi **tự cuộn chậm ngắm toàn bộ** (~1 phút, chạm vào là dừng)
 - Couple / family / ceremony / reception
 - Album **masonry tự đo kích thước ảnh** + hiệu ứng hover + lightbox (có vuốt trên điện thoại)
 - Ảnh chân dung khung vòm, hiệu ứng xuất hiện khi cuộn
-- Countdown, lịch tháng, RSVP, Google Maps, timeline, sổ lưu bút, hộp quà QR
+- Countdown, lịch tháng, RSVP, sơ đồ đường đi, timeline, sổ lưu bút
+- Hộp quà QR dưới dạng **hố đen đang quay** — chạm vào nổ "Big Bang" rồi mở quà
 
 ## Thay thông tin
 Chỉ sửa `config.js`.
