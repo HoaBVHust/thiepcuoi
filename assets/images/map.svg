@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560">
+  <defs>
+    <linearGradient id="mbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fdf9f3"/><stop offset="1" stop-color="#f2f5ee"/>
+    </linearGradient>
+    <filter id="msoft" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="40"/></filter>
+  </defs>
+  <rect width="900" height="560" fill="url(#mbg)"/>
+  <g filter="url(#msoft)">
+    <circle cx="110" cy="150" r="100" fill="#a9b79c" opacity=".35"/>
+    <circle cx="820" cy="120" r="90" fill="#c9a86a" opacity=".2"/>
+  </g>
+
+  <!-- ===== SÔNG CÀ LỒ (phía nam làng) ===== -->
+  <path d="M900 470 C 800 495, 700 505, 600 512 C 470 522, 340 522, 220 514 C 140 508, 60 505, 0 512"
+        fill="none" stroke="#b9ddf2" stroke-width="44" stroke-linecap="round"/>
+  <text x="175" y="524" font-family="Georgia,serif" font-style="italic" font-size="17" fill="#6da8cc" text-anchor="middle" transform="rotate(-2 175 524)">Sông Cà Lồ</text>
+
+  <!-- ===== VÙNG TRẮNG = LÀNG KIM THƯỢNG ===== -->
+  <path d="M200 260 C 190 190, 260 150, 350 160 C 440 168, 520 200, 545 260 C 565 320, 540 400, 480 440 C 420 475, 300 480, 240 445 C 185 412, 205 320, 200 260 Z"
+        fill="#fffdf9" stroke="#d9ddd2" stroke-width="2"/>
+  <text x="448" y="248" text-anchor="middle" font-family="Georgia,serif" font-size="22" fill="#8c9188" letter-spacing="5">LÀNG KIM THƯỢNG</text>
+
+  <!-- ===== ĐƯỜNG CHÍNH (từ Hà Nội qua làng ra Bắc Ninh) ===== -->
+  <path d="M0 400 C 90 385, 170 358, 240 332 C 310 306, 380 302, 450 320 C 520 338, 565 378, 615 425 C 668 472, 740 495, 900 512"
+        fill="none" stroke="#a9b79c" stroke-width="28" stroke-linecap="round" opacity=".4"/>
+  <path d="M0 400 C 90 385, 170 358, 240 332 C 310 306, 380 302, 450 320 C 520 338, 565 378, 615 425 C 668 472, 740 495, 900 512"
+        fill="none" stroke="#fffdf9" stroke-width="20" stroke-linecap="round"/>
+  <path d="M0 400 C 90 385, 170 358, 240 332 C 310 306, 380 302, 450 320 C 520 338, 565 378, 615 425 C 668 472, 740 495, 900 512"
+        fill="none" stroke="#c9a86a" stroke-width="2.5" stroke-dasharray="14 12" stroke-linecap="round"/>
+
+  <!-- ===== MŨI TÊN XANH DƯƠNG = HƯỚNG RA HÀ NỘI ===== -->
+  <g stroke="#4d82e0" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M100 381 l -18 14 l 18 14"/>
+    <path d="M126 379 l -18 14 l 18 14" opacity=".6"/>
+    <path d="M26 397 L 48 386 M26 397 L 48 408"/>
+  </g>
+  <g font-family="Arial,sans-serif" text-anchor="middle">
+    <text x="105" y="345" font-size="21" fill="#40523b" letter-spacing="2" font-weight="bold">VỀ HÀ NỘI</text>
+    <text x="105" y="369" font-size="15" fill="#8c9188" letter-spacing="1">khách nhà chú rể</text>
+  </g>
+
+  <!-- ===== DẤU TÍM = HƯỚNG ĐI BẮC NINH ===== -->
+  <g stroke="#9b7fc4" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M795 494 l 18 14 l -18 14"/>
+    <path d="M769 495 l 18 14 l -18 12" opacity=".6"/>
+    <path d="M876 510 L 854 499 M876 510 L 854 521"/>
+  </g>
+  <g font-family="Arial,sans-serif" text-anchor="middle">
+    <text x="735" y="438" font-size="21" fill="#40523b" letter-spacing="2" font-weight="bold">TỪ SƠN · BẮC NINH</text>
+    <text x="735" y="462" font-size="15" fill="#8c9188" letter-spacing="1">khách nhà cô dâu</text>
+  </g>
+
+  <!-- cây xanh -->
+  <g>
+    <g transform="translate(505 215)"><rect x="-3" y="6" width="6" height="14" rx="2" fill="#8c9188"/><circle r="15" fill="#63785b"/><circle cx="6" cy="-5" r="9" fill="#a9b79c"/></g>
+    <g transform="translate(565 265)"><rect x="-3" y="6" width="6" height="14" rx="2" fill="#8c9188"/><circle r="13" fill="#63785b" opacity=".9"/><circle cx="-5" cy="-4" r="8" fill="#a9b79c"/></g>
+    <g transform="translate(215 300)"><rect x="-3" y="6" width="6" height="14" rx="2" fill="#8c9188"/><circle r="14" fill="#63785b" opacity=".85"/><circle cx="-5" cy="-4" r="8" fill="#a9b79c"/></g>
+    <g transform="translate(245 430)"><rect x="-3" y="6" width="6" height="14" rx="2" fill="#8c9188"/><circle r="14" fill="#63785b"/><circle cx="6" cy="-5" r="9" fill="#a9b79c"/></g>
+    <g transform="translate(500 430)"><rect x="-3" y="6" width="6" height="14" rx="2" fill="#8c9188"/><circle r="13" fill="#63785b" opacity=".9"/><circle cx="5" cy="-4" r="8" fill="#a9b79c"/></g>
+    <g transform="translate(790 250)"><rect x="-3" y="6" width="6" height="15" rx="2" fill="#8c9188"/><circle r="15" fill="#63785b"/><circle cx="-6" cy="-4" r="8" fill="#a9b79c"/></g>
+    <g transform="translate(560 320)"><rect x="-3" y="6" width="6" height="14" rx="2" fill="#8c9188"/><circle r="12" fill="#63785b" opacity=".85"/><circle cx="5" cy="-4" r="7" fill="#a9b79c"/></g>
+  </g>
+
+  <!-- ===== TRÁI TIM = NHÀ VĂN HÓA (TIỆC NHÀ CHÚ RỂ) ===== -->
+  <g transform="translate(285 218)">
+    <circle r="24" fill="#fffdf9" stroke="#e05a4e" stroke-width="3"/>
+    <path d="M0 12 C -15 0, -19 -9, -12 -15 C -7 -19, -2 -16, 0 -11 C 2 -16, 7 -19, 12 -15 C 19 -9, 15 0, 0 12 Z" fill="#e05a4e"/>
+  </g>
+  <g font-family="Arial,sans-serif" text-anchor="end">
+    <text x="252" y="214" font-size="19" fill="#40523b" font-weight="bold" letter-spacing="1">NHÀ VĂN HÓA</text>
+    <text x="252" y="236" font-size="15" fill="#c96a5a" letter-spacing="1">TIỆC NHÀ CHÚ RỂ</text>
+  </g>
+
+  <!-- ===== MẶT CƯỜI = NHÀ CHÚ RỂ ===== -->
+  <g transform="translate(435 350)">
+    <circle r="22" fill="#f5c93c" stroke="#fffdf9" stroke-width="3"/>
+    <circle cx="-7" cy="-5" r="2.6" fill="#7a5b16"/>
+    <circle cx="7" cy="-5" r="2.6" fill="#7a5b16"/>
+    <path d="M-8 4 A 9 9 0 0 0 8 4" stroke="#7a5b16" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </g>
+  <text x="472" y="356" text-anchor="start" font-family="Arial,sans-serif" font-size="19" fill="#40523b" font-weight="bold" letter-spacing="1">NHÀ CHÚ RỂ</text>
+
+  <!-- ===== 2 CON NGÕ giữa mặt cười và mặt trăng ===== -->
+  <path d="M368 366 C 382 354, 396 344, 410 334" fill="none" stroke="#c9a86a" stroke-width="2.5" stroke-dasharray="7 6"/>
+  <path d="M356 384 C 372 372, 388 360, 402 350" fill="none" stroke="#c9a86a" stroke-width="2.5" stroke-dasharray="7 6"/>
+  <text x="428" y="412" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" fill="#8c9188" letter-spacing="1">2 con ngõ</text>
+  <path d="M420 400 C 408 388, 398 376, 390 364" stroke="#8c9188" stroke-width="1.5" fill="none"/>
+
+  <!-- ===== MẶT TRĂNG = NHÀ CÔ DÂU (TIỆC TẠI GIA) ===== -->
+  <ellipse cx="330" cy="416" rx="24" ry="7" fill="#40523b" opacity=".16"/>
+  <g transform="translate(330 386)">
+    <circle r="24" fill="#fffdf9" stroke="#f0c34e" stroke-width="3"/>
+    <path d="M 9 -16 A 16 16 0 1 0 9 16 A 11.5 11.5 0 1 1 9 -16 Z" fill="#f0c34e"/>
+  </g>
+  <g font-family="Arial,sans-serif" text-anchor="middle">
+    <text x="330" y="452" font-size="20" fill="#40523b" font-weight="bold" letter-spacing="1">NHÀ CÔ DÂU</text>
+    <text x="330" y="474" font-size="15" fill="#c9a86a" letter-spacing="2">TIỆC TẠI GIA</text>
+  </g>
+
+  <!-- la bàn -->
+  <g transform="translate(820 80)">
+    <circle r="24" fill="#fffdf9" stroke="#a9b79c" stroke-width="2"/>
+    <path d="M0 -14 L6 6 L0 2 L-6 6 Z" fill="#c9a86a"/>
+    <text y="-32" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" fill="#8c9188">N</text>
+  </g>
+</svg>

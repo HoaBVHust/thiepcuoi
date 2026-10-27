@@ -59,5 +59,11 @@ Không cấu hình thì web vẫn chạy nhưng dữ liệu chỉ lưu tạm tr�
 Chạy: `python tools/dev-server.py` → mở `http://localhost:8644`
 (server này không lưu cache — luôn hiển thị bản sửa mới nhất; server Python thường có thể giữ bản cũ trong cache trình duyệt).
 
+## Địa điểm & bản đồ
+Phần "THE VENUE" dùng **sơ đồ vẽ sẵn** (`assets/images/map.svg`) — không phụ thuộc mạng nên không bao giờ báo lỗi như bản đồ nhúng Google/OpenStreetMap (bị chặn ở nhiều mạng công ty / 4G).
+- Nút "CHỈ ĐƯỜNG — GOOGLE MAPS" mở Google Maps app của khách với ghim đúng tọa độ `reception.coords`.
+- Link "Mở bản đồ lớn" mở OpenStreetMap.
+- Muốn vẽ lại sơ đồ: sửa `assets/images/map.svg` (thay tên thôn trong file này cho khớp nếu đổi địa điểm).
+
 ## Deploy
 Push toàn bộ thư mục lên GitHub, sau đó kết nối repository với Cloudflare Pages.

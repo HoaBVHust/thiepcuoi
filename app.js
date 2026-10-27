@@ -111,6 +111,29 @@
   }),{threshold:.12});
   $$(".reveal").forEach((el)=>observer.observe(el));
 
+  // Sao băng — mỗi khi lướt qua một mục, một sao băng bay ngang (cách nhau tối thiểu 2.4s)
+  const shootSections=document.querySelectorAll("main > section, .cover, .footer");
+  let lastShoot=0;
+  function spawnShoot(sec){
+    const s=document.createElement("i");
+    s.className="shooting-star run";
+    s.style.top=(6+Math.random()*34)+"%";
+    s.style.left=(-10-Math.random()*8)+"%";
+    sec.appendChild(s);
+    s.addEventListener("animationend",()=>s.remove(),{once:true});
+    setTimeout(()=>s.remove(),2400); // phòng hờ animationend không chạy
+  }
+  if(!reducedMotion){
+    const shootIO=new IntersectionObserver(entries=>entries.forEach(en=>{
+      if(!en.isIntersecting)return;
+      const now=Date.now();
+      if(now-lastShoot<2400)return;
+      lastShoot=now;
+      spawnShoot(en.target);
+    }),{rootMargin:"-30% 0px -30% 0px"});
+    shootSections.forEach(sec=>shootIO.observe(sec));
+  }
+
   /* ======================================================================
      ALBUM ẢNH — masonry tự đo kích thước
      Mỗi ảnh được đo tỷ lệ thật (dọc/ngang/vuông) rồi tính số hàng cần chiếm,
@@ -211,18 +234,18 @@
   const end=start;
   $("#calendarLink").href=`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(C.couple.bride+" & "+C.couple.groom+" - Ngày cưới")}&dates=${start}T020000Z/${end}T140000Z&details=${encodeURIComponent("Ngày cưới của "+C.couple.bride+" & "+C.couple.groom)}&location=${encodeURIComponent(C.reception.address)}`;
 
-  // Map — nhúng OpenStreetMap theo tọa độ (không bị Google chặn như iframe maps
-  // trên một số mạng/điện thoại); nút "Chỉ đường" vẫn mở Google Maps app
+  // Địa điểm — sơ đồ vẽ sẵn (không phụ thuộc mạng, không bao giờ lỗi),
+  // nút "Chỉ đường" mở Google Maps app trên điện thoại của khách
   $("#mapsLink").href=C.reception.mapsUrl;
-  (function(){
+  const osm=$("#osmLink");
+  if(osm){
     const m=(C.reception.coords||"").split(",").map(s=>Number(s.trim()));
     if(m.length>=2&&isFinite(m[0])&&isFinite(m[1])){
-      const lat=m[0],lng=m[1],d=0.01; // khung nhìn ~2km quanh điểm tiệc
-      $("#mapFrame").src=`https://www.openstreetmap.org/export/embed.html?bbox=${(lng-d).toFixed(5)}%2C${(lat-d).toFixed(5)}%2C${(lng+d).toFixed(5)}%2C${(lat+d).toFixed(5)}&layer=mapnik&marker=${lat}%2C${lng}`;
+      osm.href=`https://www.openstreetmap.org/?mlat=${m[0]}&mlon=${m[1]}#map=16/${m[0]}/${m[1]}`;
     }else{
-      $("#mapFrame").src=`https://www.google.com/maps?q=${encodeURIComponent(C.reception.address)}&output=embed`;
+      osm.remove();
     }
-  })();
+  }
 
   // RSVP — gửi về Google Sheet (nếu đã cấu hình appsScriptUrl), kèm honeypot chống bot
   const rsvpNote=$("#rsvpNote"), rsvpStats=$("#rsvpStats");
@@ -292,8 +315,28 @@
   });
   loadWishes();
 
-  // Gift modal
-  $("#giftOpen").onclick=()=>$("#giftModal").classList.add("open");
+  // Hố đen — chạm vào: lóe Big Bang (vòng sáng + 14 mảnh vụn bay toả) rồi mở hộp quà
+  $("#giftOpen").onclick=()=>{
+    const bh=$("#giftOpen");
+    if(reducedMotion||bh.classList.contains("bang")){$("#giftModal").classList.add("open");return}
+    bh.classList.add("bang");
+    const wrap=document.createElement("span");
+    wrap.className="bb-wrap";
+    const flash=document.createElement("span");
+    flash.className="bb-flash";
+    wrap.appendChild(flash);
+    for(let i=0;i<14;i++){
+      const p=document.createElement("span");
+      p.className="bb-p";
+      p.style.setProperty("--a",Math.round(i*(360/14)+Math.random()*14)+"deg");
+      p.style.setProperty("--r",Math.round(120+Math.random()*130)+"px");
+      wrap.appendChild(p);
+    }
+    bh.appendChild(wrap);
+    setTimeout(()=>wrap.remove(),1400);
+    setTimeout(()=>bh.classList.remove("bang"),700);
+    setTimeout(()=>$("#giftModal").classList.add("open"),620);
+  };
   $("#giftClose").onclick=()=>$("#giftModal").classList.remove("open");
   $("#giftModal").addEventListener("click",e=>{if(e.target.id==="giftModal")$("#giftModal").classList.remove("open")});
 
