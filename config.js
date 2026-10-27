@@ -91,7 +91,7 @@ const WEDDING_CONFIG = {
      Để trống "" → web chạy chế độ demo: dữ liệu chỉ lưu trên trình duyệt
      của khách, KHÔNG có nơi tổng hợp. Nhớ điền trước khi deploy thật!
      ====================================================================== */
-  appsScriptUrl: "",
+  appsScriptUrl: "https://script.google.com/macros/s/AKfycbx2jQ-QMgXBGfOWlhefaRp1gZr3tGMrsuiaxdAuwaI2s76SprLYqgbAJU6TF0Oimuur/exec",
 
   music: {
     enabled: true,
