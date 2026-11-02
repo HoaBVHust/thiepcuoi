@@ -7,14 +7,14 @@ const WEDDING_CONFIG = {
     // Ảnh chân dung chú rể / cô dâu (phần "Hai chúng tôi").
     // Bất kể ảnh dọc, ngang hay vuông — web tự cắt vừa khung 2:3, không méo.
     // Đổi thành "assets/images/anh-chu-re.jpg" khi có ảnh thật.
-    groomPhoto: "assets/images/JLT_3200.JPG",
+    groomPhoto: "assets/images/JLT_3200.jpg",
     bridePhoto: "assets/images/JLT_3181.jpg"
   },
 
   // Ảnh lớn ở màn chào (hero). Ảnh bất kỳ kích thước nào cũng tự cắt vừa khung vòm 4:5.
   heroPhoto: {
     //src: "assets/images/final.jpeg",
-    src: "assets/images/JLT_2652.jpg",
+    src: "assets/images/JLT_2440.jpg",
     alt: "Hoài An & Bùi Hòa — ảnh đôi bên bờ biển"
   },
 
