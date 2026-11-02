@@ -7,7 +7,7 @@ const WEDDING_CONFIG = {
     // Ảnh chân dung chú rể / cô dâu (phần "Hai chúng tôi").
     // Bất kể ảnh dọc, ngang hay vuông — web tự cắt vừa khung 2:3, không méo.
     // Đổi thành "assets/images/anh-chu-re.jpg" khi có ảnh thật.
-    groomPhoto: "assets/images/JLT_3200.jpg",
+    groomPhoto: "assets/images/JLT_3200.JPG",
     bridePhoto: "assets/images/JLT_3181.jpg"
   },
 
