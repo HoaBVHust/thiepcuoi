@@ -7,7 +7,7 @@ const WEDDING_CONFIG = {
     // Ảnh chân dung chú rể / cô dâu (phần "Hai chúng tôi").
     // Bất kể ảnh dọc, ngang hay vuông — web tự cắt vừa khung 2:3, không méo.
     // Đổi thành "assets/images/anh-chu-re.jpg" khi có ảnh thật.
-    groomPhoto: "assets/images/JLT_3200.JPG",
+    groomPhoto: "assets/images/JLT_3200.jpg",
     bridePhoto: "assets/images/JLT_3181.jpg"
   },
 
@@ -26,6 +26,9 @@ const WEDDING_CONFIG = {
     month: "THÁNG 11",
     year: "2026",
     lunar: "21 tháng 10 nă Bính Ngọ"
+    // Tiệc mừng tổ chức trước ngày cưới 1 ngày (28/11) — tự đánh dấu trong ô lịch
+    // WEDDING DAY kèm chú thích. Đặt "" để ẩn ngày này khỏi lịch.
+    partyBeforeLabel: "Tiệc mừng"
   },
 
   ceremony: {

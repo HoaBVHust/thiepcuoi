@@ -150,60 +150,86 @@
   }
 
   /* ======================================================================
-     ALBUM ẢNH — masonry tự đo kích thước
-     Mỗi ảnh được đo tỷ lệ thật (dọc/ngang/vuông) rồi tính số hàng cần chiếm,
-     nhờ vậy thêm ảnh mới BẤT KỲ kích thước nào lưới vẫn đẹp, ảnh không méo.
-     Ảnh có featured:true chiếm 2 cột.
+     ALBUM ẢNH — băng chuyền 3D xoay tròn (kiểu coverflow)
+     Ảnh giữa hướng thẳng người xem, hai bên xoay nghiêng quanh trục Y rồi
+     chìm dần ra sau — vòng xoay vô hạn. Tự chạy chậm; rê chuột/vuốt thì dừng.
+     Click ảnh giữa → mở lightbox; click ảnh bên / nút ‹ › / quét ngang → xoay.
+     Vị trí từng ảnh quyết định bằng data-pos (0, ±1, ±2, far) — CSS vẽ 3D.
      ====================================================================== */
   const gallery=$("#gallery");
   const entries=C.photos.map(p=>typeof p==="string"?{src:p}:p).filter(e=>e&&e.src);
-  const items=[];
+  const slides=[];
+  let active=0;
+  const galCounter=$("#galleryCounter");
 
-  entries.forEach((entry,i)=>{
+  entries.forEach(entry=>{
     const item=document.createElement("div");
     item.className="gallery-item";
-    if(entry.featured) item.classList.add("featured");
-    item.style.setProperty("--d",`${Math.min(i%4,3)*90}ms`); // hiệu ứng so le
-
     const img=document.createElement("img");
     img.src=entry.src; img.loading="lazy"; img.decoding="async";
-    img.alt=entry.alt||`Ảnh cưới ${i+1}`;
-
-    // Chú thích hiện khi hover
-    const cap=document.createElement("div");
-    cap.className="g-cap";
-    cap.innerHTML=`<em></em><i>${String(i+1).padStart(2,"0")}</i>`;
-    cap.querySelector("em").textContent=entry.alt||"";
-
-    img.addEventListener("load",()=>{ item.classList.add("visible"); layoutMasonry(); });
-    img.onerror=()=>{ item.remove(); console.info(`[thiepcuoi] Không tìm thấy ảnh: ${entry.src}`); };
-
-    item.append(img,cap);
-    item.addEventListener("click",()=>openLightbox(i));
+    img.alt=entry.alt||`Ảnh cưới ${entries.indexOf(entry)+1}`;
+    img.onerror=()=>{ // ảnh lỗi → gỡ khỏi vòng xoay và khỏi lightbox luôn
+      item.remove();
+      const s=slides.indexOf(item);if(s>-1)slides.splice(s,1);
+      const e2=entries.indexOf(entry);if(e2>-1)entries.splice(e2,1);
+      if(active>=slides.length)active=Math.max(0,slides.length-1);
+      updateCarousel();
+      console.info(`[thiepcuoi] Không tìm thấy ảnh: ${entry.src}`);
+    };
+    item.appendChild(img);
+    item.addEventListener("click",()=>{
+      if(item.dataset.pos==="0")openLightbox(entries.indexOf(entry));
+      else if(item.dataset.pos!=="far")goTo(Number(item.dataset.pos));
+      restartAuto();
+    });
     gallery.appendChild(item);
-    items.push(item);
+    slides.push(item);
   });
 
-  // Đo và gán số hàng cho từng ảnh theo tỷ lệ thật của nó
-  const ROW=8, GAP=14;
-  function layoutMasonry(){
-    items.forEach(item=>{
-      if(!item.isConnected) return;
-      const w=item.clientWidth;
-      const img=item.querySelector("img");
-      if(!img||!img.naturalWidth) return;
-      const h=w*(img.naturalHeight/img.naturalWidth);
-      const span=Math.max(4,Math.round((h+GAP)/(ROW+GAP)));
-      item.style.setProperty("--s",span);
+  function updateCarousel(){
+    const n=slides.length;
+    slides.forEach((item,i)=>{
+      let d=(i-active+n)%n;        // khoảng cách tròn, lấy phía ngắn nhất
+      if(d>n/2)d-=n;
+      item.dataset.pos=Math.abs(d)>2?"far":String(d);
+      item.style.zIndex=String(10-Math.abs(d));
     });
+    if(galCounter)galCounter.textContent=`${active+1} / ${n}`;
   }
-  let resizeTimer;
-  window.addEventListener("resize",()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(layoutMasonry,120)});
-  window.addEventListener("load",layoutMasonry);
+  function goTo(step){
+    const n=slides.length;
+    if(n<2)return;
+    active=(active+step%n+n)%n;
+    updateCarousel();
+  }
+
+  $("#galPrev").addEventListener("click",()=>{goTo(-1);restartAuto();});
+  $("#galNext").addEventListener("click",()=>{goTo(1);restartAuto();});
+  // vuốt trên điện thoại
+  let galX=null;
+  gallery.addEventListener("touchstart",e=>galX=e.touches[0].clientX,{passive:true});
+  gallery.addEventListener("touchend",e=>{
+    if(galX===null)return;
+    const dx=e.changedTouches[0].clientX-galX;
+    if(Math.abs(dx)>40){goTo(dx<0?1:-1);restartAuto();}
+    galX=null;
+  },{passive:true});
+
+  // tự xoay chậm — rê chuột vào thì tạm dừng, rời ra/chạm thì chạy lại
+  let autoTimer=null;
+  function restartAuto(){
+    if(reducedMotion||slides.length<2)return;
+    clearInterval(autoTimer);
+    autoTimer=setInterval(()=>{if(!document.hidden)goTo(1)},3400);
+  }
+  gallery.addEventListener("pointerenter",()=>clearInterval(autoTimer));
+  gallery.addEventListener("pointerleave",restartAuto);
+  updateCarousel();
+  restartAuto();
 
   // Lightbox
   let current=0; const lb=$("#lightbox"), lbImg=$("#lightboxImage"), counter=$("#lightboxCounter"), caption=$("#lightboxCaption");
-  function openLightbox(i){current=i;lb.classList.add("open");document.body.style.overflow="hidden";renderLightbox()}
+  function openLightbox(i){current=i;lb.classList.add("open");document.body.style.overflow="hidden";clearInterval(autoTimer);renderLightbox()}
   function renderLightbox(){
     // reset animation
     lbImg.style.animation="none"; void lbImg.offsetWidth; lbImg.style.animation="";
@@ -214,7 +240,7 @@
   }
   function next(){current=(current+1)%entries.length;renderLightbox()}
   function prev(){current=(current-1+entries.length)%entries.length;renderLightbox()}
-  function closeLightbox(){lb.classList.remove("open");document.body.style.overflow=""}
+  function closeLightbox(){lb.classList.remove("open");document.body.style.overflow="";restartAuto()}
   $("#lightboxClose").onclick=closeLightbox;$("#lightboxNext").onclick=next;$("#lightboxPrev").onclick=prev;
   lb.addEventListener("click",e=>{if(e.target===lb)closeLightbox()});
   document.addEventListener("keydown",e=>{if(!lb.classList.contains("open"))return;if(e.key==="Escape")closeLightbox();if(e.key==="ArrowRight")next();if(e.key==="ArrowLeft")prev()});
@@ -237,14 +263,29 @@
   }
   countdown();setInterval(countdown,1000);
 
-  // Calendar
+  // Calendar — ngày cưới tô trái tim, ngày tiệc trước 1 ngày khoanh vàng
   const cal=$("#calendar"), year=date.getFullYear(), month=date.getMonth(), selected=date.getDate();
   set("calendarTitle",`Tháng ${month+1} / ${year}`);
   const names=["CN","T2","T3","T4","T5","T6","T7"];
   cal.innerHTML=`<div class="cal-head">${names.map(x=>`<span>${x}</span>`).join("")}</div><div class="cal-grid"></div>`;
   const grid=cal.querySelector(".cal-grid"), first=new Date(year,month,1).getDay(), days=new Date(year,month+1,0).getDate();
+  // ngày tiệc trước ngày cưới 1 ngày — tự trừ 1 nên vẫn đúng khi sang tháng trước;
+  // chỉ hiện khi khác tháng không xảy ra (cùng tháng với lịch đang hiển thị) và có nhãn trong config
+  const partyLabel=(C.date.partyBeforeLabel||"").trim();
+  const partyTmp=new Date(year,month,selected-1);
+  const partyDay=(partyLabel&&partyTmp.getMonth()===month&&partyTmp.getFullYear()===year)?partyTmp.getDate():0;
   for(let i=0;i<first;i++)grid.innerHTML+="<span class='empty'>0</span>";
-  for(let d=1;d<=days;d++)grid.innerHTML+=`<span class="${d===selected?"selected":""}">${d}</span>`;
+  for(let d=1;d<=days;d++){
+    const cls=d===selected?"selected":(d===partyDay?"party":"");
+    grid.innerHTML+=`<span class="${cls}">${d}</span>`;
+  }
+  // chú thích dưới lịch
+  const legend=document.createElement("div");
+  legend.className="cal-legend";
+  legend.innerHTML=
+    `<span><i class="lg-heart"></i>${selected} · ${month+1} — Ngày cưới</span>`+
+    (partyDay?`<span><i class="lg-party"></i>${partyDay} · ${month+1} — ${escapeHtml(partyLabel)}</span>`:"");
+  cal.appendChild(legend);
   const start=`${year}${String(month+1).padStart(2,"0")}${String(selected).padStart(2,"0")}`;
   const end=start;
   $("#calendarLink").href=`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(C.couple.bride+" & "+C.couple.groom+" - Ngày cưới")}&dates=${start}T020000Z/${end}T140000Z&details=${encodeURIComponent("Ngày cưới của "+C.couple.bride+" & "+C.couple.groom)}&location=${encodeURIComponent(C.reception.address)}`;
@@ -332,6 +373,7 @@
 
   // Hố đen — chạm vào: lóe Big Bang (vòng sáng + 14 mảnh vụn bay toả) rồi mở hộp quà
   $("#giftOpen").onclick=()=>{
+    prefetchQr(); // tải sẵn 2 ảnh QR sớm nhất có thể — nút tải mới chạy được trên điện thoại
     const bh=$("#giftOpen");
     if(reducedMotion||bh.classList.contains("bang")){$("#giftModal").classList.add("open");return}
     bh.classList.add("bang");
@@ -361,8 +403,20 @@
     bride:{src:C.gift.bride.qr,label:`QR Cô Dâu — ${C.couple.bride}`,file:"QR-co-dau"}
   };
   let qrKey=null;
+  /* Tải sẵn 2 ảnh QR vào bộ nhớ đệm. QUAN TRỌNG trên điện thoại: nếu bấm nút tải
+     rồi mới await fetch(), cú chạm đã hết hiệu lực (user gesture) và trình duyệt
+     di động chặn lặng lẽ việc tải — máy tính thì không. Nhờ tải trước, nút tải
+     chỉ việc tạo blob + click ngay trong cú chạm. */
+  const qrBlobs={};
+  function prefetchQr(){
+    Object.keys(qrData).forEach(k=>{
+      if(qrBlobs[k]!==undefined)return;
+      qrBlobs[k]=null; // đang tải
+      fetch(qrData[k].src).then(r=>r.blob()).then(b=>{qrBlobs[k]=b}).catch(()=>{qrBlobs[k]=false});
+    });
+  }
   function openQrViewer(k){
-    qrKey=k;
+    qrKey=k; prefetchQr();
     $("#qrViewerImage").src=qrData[k].src;
     $("#qrViewerTitle").textContent=qrData[k].label;
     qrViewer.classList.add("open");
@@ -374,20 +428,25 @@
   $("#qrViewerClose").onclick=closeQrViewer;
   qrViewer.addEventListener("click",e=>{if(e.target===qrViewer)closeQrViewer()});
   document.addEventListener("keydown",e=>{if(e.key==="Escape"&&qrViewer.classList.contains("open"))closeQrViewer()});
-  $("#qrViewerDownload").onclick=async()=>{
+  $("#qrViewerDownload").onclick=()=>{
     if(!qrKey)return;
     const {src,file}=qrData[qrKey];
     const ext=(src.split("?")[0].match(/\.([a-z0-9]+)$/i)||[,"png"])[1].toLowerCase();
     const name=`${file}.${ext}`;
-    const click=a=>{document.body.appendChild(a);a.click();a.remove()};
-    try{ // tải qua blob để đặt tên file đúng
-      const url=URL.createObjectURL(await (await fetch(src)).blob());
-      click(Object.assign(document.createElement("a"),{href:url,download:name}));
-      setTimeout(()=>URL.revokeObjectURL(url),4000);
-    }catch(e){ // mở bằng file:// hoặc mạng chặn → tải trực tiếp
-      click(Object.assign(document.createElement("a"),{href:src,download:name}));
+    const go=(href)=>{ // đồng bộ 100% trong cú chạm — không await ở đây
+      const a=Object.assign(document.createElement("a"),{href,download:name});
+      a.rel="noopener";
+      document.body.appendChild(a);a.click();a.remove();
+    };
+    const blob=qrBlobs[qrKey];
+    if(blob){ // ảnh đã sẵn sàng → tải qua blob để đặt đúng tên file
+      const url=URL.createObjectURL(blob);
+      go(url);
+      setTimeout(()=>URL.revokeObjectURL(url),20000);
+    }else{ // mạng chậm chưa kịp tải sẵn, hoặc fetch lỗi / mở bằng file:// → tải trực tiếp
+      go(src);
     }
   };
 
-  window.addEventListener("load",()=>{layoutMasonry();setTimeout(()=>$("#loader").classList.add("hide"),450)});
+  window.addEventListener("load",()=>{setTimeout(()=>$("#loader").classList.add("hide"),450)});
 })();
