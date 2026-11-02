@@ -545,6 +545,31 @@ h1,h2,h3,h4{text-wrap:balance}
 .bank-card img{width:180px;height:180px;object-fit:contain;background:#fff;border-radius:8px;margin:auto}
 .bank-card p{font-size:.72rem;line-height:1.9;color:var(--muted);letter-spacing:.03em}
 .modal-close{right:20px;top:10px}
+/* QR — chạm để phóng to, tải về trong bản phóng to */
+.bank-card .qr-zoom{cursor:pointer;transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.bank-card .qr-zoom:hover{transform:scale(1.05);box-shadow:0 8px 20px rgba(29,36,29,.18)}
+.qr-hint{display:block;margin-top:12px;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);opacity:.8}
+.qr-viewer{
+  position:fixed;inset:0;background:#0b1220f5;z-index:2100;display:none;
+  align-items:center;justify-content:center;padding:30px;
+}
+.qr-viewer.open{display:flex;animation:fade-in .35s var(--ease)}
+.qr-viewer-card{
+  margin:0;background:var(--paper);border-radius:18px;padding:32px 30px 28px;
+  max-width:min(430px,92vw);text-align:center;
+  box-shadow:0 30px 80px rgba(0,0,0,.5);animation:lb-zoom .45s var(--ease);
+}
+.qr-viewer-card figcaption{font:400 1.35rem var(--serif);color:var(--green-dark);margin-bottom:18px}
+.qr-viewer-card img{display:block;width:min(70vw,310px);height:auto;object-fit:contain;background:#fff;border-radius:10px;margin:0 auto}
+.qr-viewer-tip{font-size:.68rem;line-height:1.8;color:var(--muted);letter-spacing:.03em;margin:16px 0 18px}
+.qr-download{
+  display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;
+  font-family:var(--sans);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;
+  padding:.95em 1.9em;border-radius:999px;background:var(--green-dark);color:var(--cream);
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s;
+}
+.qr-download:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(64,82,59,.4);background:#33422f}
+.qr-download:active{transform:translateY(0)}
 
 /* ---------- Hiệu ứng xuất hiện khi cuộn ---------- */
 .reveal{
@@ -575,6 +600,8 @@ h1,h2,h3,h4{text-wrap:balance}
   .gift-grid{grid-template-columns:1fr;max-height:72vh;overflow:auto}
   .gift-modal h3{top:14px;font-size:1.4rem}
   .bank-card img{width:140px;height:140px}
+  .qr-viewer-card{padding:26px 22px 24px}
+  .qr-viewer-card img{width:min(62vw,270px)}
   .count-grid strong{font-size:2rem}
   .petal{display:none}
 }

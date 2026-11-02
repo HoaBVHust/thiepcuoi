@@ -355,5 +355,39 @@
   $("#giftClose").onclick=()=>$("#giftModal").classList.remove("open");
   $("#giftModal").addEventListener("click",e=>{if(e.target.id==="giftModal")$("#giftModal").classList.remove("open")});
 
+  /* QR — chạm vào ảnh để phóng to từng mã, trong bản phóng to có nút tải ảnh về */
+  const qrViewer=$("#qrViewer"), qrData={
+    groom:{src:C.gift.groom.qr,label:`QR Chú Rể — ${C.couple.groom}`,file:"QR-chu-re"},
+    bride:{src:C.gift.bride.qr,label:`QR Cô Dâu — ${C.couple.bride}`,file:"QR-co-dau"}
+  };
+  let qrKey=null;
+  function openQrViewer(k){
+    qrKey=k;
+    $("#qrViewerImage").src=qrData[k].src;
+    $("#qrViewerTitle").textContent=qrData[k].label;
+    qrViewer.classList.add("open");
+    document.body.style.overflow="hidden";
+  }
+  function closeQrViewer(){qrViewer.classList.remove("open");document.body.style.overflow=""}
+  $("#qrGroom").addEventListener("click",()=>openQrViewer("groom"));
+  $("#qrBride").addEventListener("click",()=>openQrViewer("bride"));
+  $("#qrViewerClose").onclick=closeQrViewer;
+  qrViewer.addEventListener("click",e=>{if(e.target===qrViewer)closeQrViewer()});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&qrViewer.classList.contains("open"))closeQrViewer()});
+  $("#qrViewerDownload").onclick=async()=>{
+    if(!qrKey)return;
+    const {src,file}=qrData[qrKey];
+    const ext=(src.split("?")[0].match(/\.([a-z0-9]+)$/i)||[,"png"])[1].toLowerCase();
+    const name=`${file}.${ext}`;
+    const click=a=>{document.body.appendChild(a);a.click();a.remove()};
+    try{ // tải qua blob để đặt tên file đúng
+      const url=URL.createObjectURL(await (await fetch(src)).blob());
+      click(Object.assign(document.createElement("a"),{href:url,download:name}));
+      setTimeout(()=>URL.revokeObjectURL(url),4000);
+    }catch(e){ // mở bằng file:// hoặc mạng chặn → tải trực tiếp
+      click(Object.assign(document.createElement("a"),{href:src,download:name}));
+    }
+  };
+
   window.addEventListener("load",()=>{layoutMasonry();setTimeout(()=>$("#loader").classList.add("hide"),450)});
 })();

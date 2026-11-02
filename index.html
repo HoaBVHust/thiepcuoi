@@ -243,9 +243,22 @@
     <button class="modal-close" id="giftClose">×</button>
     <h3>Hộp Quà Mừng</h3>
     <div class="gift-grid">
-      <div class="bank-card"><h4>Chú Rể — <span id="giftGroom"></span></h4><img id="qrGroom" alt="QR chú rể"><p id="bankGroom"></p></div>
-      <div class="bank-card"><h4>Cô Dâu — <span id="giftBride"></span></h4><img id="qrBride" alt="QR cô dâu"><p id="bankBride"></p></div>
+      <div class="bank-card"><h4>Chú Rể — <span id="giftGroom"></span></h4><img id="qrGroom" class="qr-zoom" alt="QR chú rể — chạm để phóng to" title="Chạm để phóng to"><p id="bankGroom"></p><span class="qr-hint">Chạm ảnh để phóng to &amp; tải về</span></div>
+      <div class="bank-card"><h4>Cô Dâu — <span id="giftBride"></span></h4><img id="qrBride" class="qr-zoom" alt="QR cô dâu — chạm để phóng to" title="Chạm để phóng to"><p id="bankBride"></p><span class="qr-hint">Chạm ảnh để phóng to &amp; tải về</span></div>
     </div>
+  </div>
+
+  <div class="qr-viewer" id="qrViewer" role="dialog" aria-modal="true" aria-label="Mã QR phóng to">
+    <button class="modal-close" id="qrViewerClose" aria-label="Đóng">×</button>
+    <figure class="qr-viewer-card">
+      <figcaption id="qrViewerTitle"></figcaption>
+      <img id="qrViewerImage" alt="Mã QR phóng to">
+      <p class="qr-viewer-tip">Mở ứng dụng ngân hàng và quét mã này để chuyển khoản</p>
+      <button class="qr-download" id="qrViewerDownload" type="button">
+        <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M12 3v10m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Tải ảnh QR
+      </button>
+    </figure>
   </div>
 
   <script src="config.js"></script>
