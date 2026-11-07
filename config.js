@@ -27,7 +27,7 @@ const WEDDING_CONFIG = {
     dayNumber: "29",
     month: "THÁNG 11",
     year: "2026",
-    lunar: "21 tháng 10 nă Bính Ngọ",
+    lunar: "21 tháng 10 năm Bính Ngọ",
     // Tiệc mừng tổ chức trước ngày cưới 1 ngày (28/11) — tự đánh dấu trong ô lịch
     // WEDDING DAY kèm chú thích. Đặt "" để ẩn ngày này khỏi lịch.
     partyBeforeLabel: "Tiệc mừng"
@@ -35,7 +35,8 @@ const WEDDING_CONFIG = {
 
   ceremony: {
     time: "10:00",
-    title: "LỄ THÀNH HÔN",
+    title: "LỄ VU QUY",
+    //title: "LỄ THÀNH HÔN",
     subtitle: "ĐƯỢC CỬ HÀNH TẠI TƯ GIA"
   },
 
