@@ -16,7 +16,7 @@
   set("heroDay", C.date.day); set("heroDayNumber", C.date.dayNumber); set("heroMonth", C.date.month); set("heroYear", C.date.year);
   set("ceremonySubtitle", C.ceremony.subtitle); set("ceremonyTime", C.ceremony.time);
   set("ceremonyDay", C.date.day); set("ceremonyDayNumber", C.date.dayNumber); set("ceremonyMonth", C.date.month); set("ceremonyYear", C.date.year); set("ceremonyLunar", C.date.lunar);
-  set("receptionTime", C.reception.startTime); set("receptionDay", C.date.day); set("receptionDayName", C.date.day); set("receptionDayNumber", C.date.dayNumber); set("receptionMonth", C.date.month); set("receptionYear", C.date.year);
+  set("receptionTime", C.reception.startTime); set("receptionDay", C.date.dayTiec); set("receptionDayName", C.date.dayTiec); set("receptionDayNumber", C.date.dayTiecNumber); set("receptionMonth", C.date.month); set("receptionYear", C.date.year);
   set("guestTime", C.reception.guestTime); set("startTime", C.reception.startTime);
   set("groomFamilyTitle",C.family.groom.title); set("groomParents",`${C.family.groom.father} · ${C.family.groom.mother}`); set("groomAddress",C.family.groom.address);
   set("brideFamilyTitle",C.family.bride.title); set("brideParents",`${C.family.bride.father} · ${C.family.bride.mother}`); set("brideAddress",C.family.bride.address);

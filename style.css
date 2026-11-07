@@ -17,12 +17,12 @@
   --sans:"Montserrat",Arial,sans-serif;
 
   /* Thang chữ: chỉnh 1 chỗ, áp dụng toàn site */
-  --fs-eyebrow:clamp(.74rem,1.6vw,.85rem);
-  --fs-body:clamp(1rem,1.7vw,1.08rem);
-  --fs-script-xl:clamp(3.4rem,11vw,5rem);   /* tên trên bìa */
-  --fs-script-lg:clamp(2.9rem,9vw,4.3rem);  /* tên ở hero/footer */
-  --fs-script-md:clamp(1.7rem,3.8vw,2.1rem);/* tên chú rể/cô dâu */
-  --fs-title:clamp(1.65rem,3.6vw,2.15rem);  /* tiêu đề mục */
+  --fs-eyebrow:clamp(.8rem,1.8vw,.94rem);
+  --fs-body:clamp(1.06rem,1.9vw,1.16rem);
+  --fs-script-xl:clamp(3.6rem,11.5vw,5.4rem);   /* tên trên bìa */
+  --fs-script-lg:clamp(3.1rem,9.5vw,4.6rem);  /* tên ở hero/footer */
+  --fs-script-md:clamp(1.85rem,4vw,2.3rem);/* tên chú rể/cô dâu */
+  --fs-title:clamp(1.8rem,3.9vw,2.35rem);  /* tiêu đề mục */
   --fs-number-xl:clamp(3rem,8vw,4.25rem);   /* ngày lớn */
   --fs-number-lg:clamp(2.7rem,7vw,3.5rem);
   --fs-number-md:clamp(2.1rem,5.5vw,2.9rem);
@@ -62,7 +62,7 @@ h1,h2,h3,h4{text-wrap:balance}
 /* ---------- Nút ---------- */
 .open-btn,.form-card button{
   border:1px solid var(--green);background:transparent;color:#e4ecd4;
-  padding:.95em 2.4em;letter-spacing:.22em;font-size:.8rem;font-weight:500;
+  padding:.95em 2.4em;letter-spacing:.22em;font-size:.88rem;font-weight:500;
   cursor:pointer;transition:all .35s var(--ease);
 }
 .open-btn:hover,.form-card button:hover{
@@ -87,9 +87,9 @@ h1,h2,h3,h4{text-wrap:balance}
   display:flex;flex-direction:column;gap:2px;
   text-shadow:0 2px 24px rgba(10,16,30,.65);
 }
-.cover h1 b{font:italic 400 clamp(1.15rem,3vw,1.45rem) var(--serif);color:#c9d2b4}
+.cover h1 b{font:italic 400 clamp(1.3rem,3.2vw,1.6rem) var(--serif);color:#c9d2b4}
 .ornament{font-size:clamp(1.35rem,3vw,1.6rem);color:#e5c98f;margin:20px 0 8px}
-.cover-date{font:400 clamp(1.05rem,2.6vw,1.25rem) var(--serif);letter-spacing:.14em;color:#e7ddca}
+.cover-date{font:400 clamp(1.15rem,2.8vw,1.35rem) var(--serif);letter-spacing:.14em;color:#e7ddca}
 .cover .open-btn{margin-top:34px;border-color:#e8dcc4;color:#f4ead2}
 .cover .open-btn:hover{background:#f4ead2;border-color:#f4ead2;color:#1c2338;box-shadow:0 10px 26px rgba(0,0,0,.5)}
 
@@ -178,7 +178,7 @@ h1,h2,h3,h4{text-wrap:balance}
   font-family:var(--script);font-weight:400;color:#f3e7cb;
   font-size:var(--fs-script-lg);line-height:1.1;margin:24px 0;
 }
-.hero h2 small{display:block;font:italic 400 clamp(1.15rem,3vw,1.5rem) var(--serif);color:#c9d2b4;margin:4px 0}
+.hero h2 small{display:block;font:italic 400 clamp(1.3rem,3.2vw,1.6rem) var(--serif);color:#c9d2b4;margin:4px 0}
 .thin-line{width:110px;height:1px;background:var(--line);margin:22px auto}
 .hero-content>p:last-of-type{font:400 var(--fs-body) var(--serif);color:var(--muted);letter-spacing:.02em}
 
@@ -204,7 +204,7 @@ h1,h2,h3,h4{text-wrap:balance}
   font:400 var(--fs-number-xl)/1 var(--serif);
   border-left:1px solid var(--line);border-right:1px solid var(--line);padding:0 22px;
 }
-.date-card em{grid-column:1/-1;font:400 .9rem var(--serif);font-style:normal;letter-spacing:.3em}
+.date-card em{grid-column:1/-1;font:400 .98rem var(--serif);font-style:normal;letter-spacing:.3em}
 
 /* ---------- Hai chúng tôi ---------- */
 .couple-grid{display:grid;grid-template-columns:1fr 80px 1fr;align-items:center;max-width:700px;margin:auto;gap:10px}
@@ -221,7 +221,7 @@ h1,h2,h3,h4{text-wrap:balance}
 .person:hover .portrait img{transform:scale(1.06)}
 .person-bride .portrait{rotate:2deg}
 .person-groom .portrait{rotate:-2deg}
-.role{display:block;color:var(--muted);font-size:.72rem;letter-spacing:.34em;margin-top:26px;font-weight:500}
+.role{display:block;color:var(--muted);font-size:.8rem;letter-spacing:.34em;margin-top:26px;font-weight:500}
 .person h3{font:400 var(--fs-script-md) var(--script);color:#f0e7d3;margin:8px 0 0}
 .amp{font:italic 400 clamp(1.7rem,4vw,2.1rem) var(--serif);color:var(--sage);text-align:center}
 
@@ -232,15 +232,15 @@ h1,h2,h3,h4{text-wrap:balance}
   transition:transform .4s var(--ease),box-shadow .4s var(--ease);
 }
 .family-card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(0,0,0,.4)}
-.family-title{font-size:.74rem;letter-spacing:.3em;color:var(--gold);font-weight:500;text-transform:uppercase}
+.family-title{font-size:.82rem;letter-spacing:.3em;color:var(--gold);font-weight:500;text-transform:uppercase}
 .family-card h4{font:400 clamp(1.25rem,3vw,1.5rem) var(--serif);margin:14px 0 10px;color:#f0e7d3}
-.family-card p:last-child{font-size:.9rem;line-height:1.9;color:var(--muted)}
+.family-card p:last-child{font-size:1rem;line-height:1.9;color:var(--muted)}
 
 /* ---------- Lễ thành hôn ---------- */
 .ceremony{text-align:center;background:radial-gradient(58% 55% at 50% 50%,rgba(140,120,220,.13),transparent)}
 .invitation-line{font-size:var(--fs-eyebrow);letter-spacing:.24em;color:var(--muted);font-weight:500}
 .names-line{font:400 clamp(1.7rem,4.6vw,2.4rem) var(--serif);color:#f0e7d3;margin:14px 0 6px}
-.names-line b{font:italic 400 clamp(1.1rem,2.8vw,1.4rem) var(--serif);color:#c9d2b4}
+.names-line b{font:italic 400 clamp(1.25rem,3vw,1.55rem) var(--serif);color:#c9d2b4}
 .ceremony-subtitle{font-size:var(--fs-eyebrow);letter-spacing:.24em;color:var(--muted)}
 .ceremony-time{font:400 var(--fs-number-lg)/1.15 var(--serif);color:var(--green);margin:24px 0}
 .mini-date{display:flex;justify-content:center;align-items:center;gap:14px}
@@ -248,8 +248,8 @@ h1,h2,h3,h4{text-wrap:balance}
   font:400 var(--fs-number-lg)/1 var(--serif);
   border-left:1px solid var(--line);border-right:1px solid var(--line);padding:0 20px;
 }
-.mini-date b{font-size:.74rem;letter-spacing:.24em;font-weight:500}
-.lunar{font:400 .95rem var(--serif);color:var(--muted);letter-spacing:.04em}
+.mini-date b{font-size:.8rem;letter-spacing:.24em;font-weight:500;white-space:nowrap}
+.lunar{font:400 1.05rem var(--serif);color:var(--muted);letter-spacing:.04em}
 
 /* ---------- Album ảnh: băng chuyền 3D xoay tròn (kiểu coverflow) ----------
    Ảnh giữa phẳng và sáng, hai bên rotateY nghiêng vào trong rồi chìm ra sau.
@@ -277,7 +277,7 @@ h1,h2,h3,h4{text-wrap:balance}
 .gallery-item[data-pos="-2"]{transform:translate(-50%,-50%) translateX(calc(var(--cw)*-1.3)) rotateY(56deg) translateZ(-170px) scale(.85);opacity:.25}
 .gallery-item[data-pos="far"]{transform:translate(-50%,-50%) translateZ(-520px);opacity:0;pointer-events:none}
 .gallery-counter{
-  text-align:center;color:var(--muted);font:400 .8rem var(--sans);
+  text-align:center;color:var(--muted);font:400 .88rem var(--sans);
   letter-spacing:.3em;margin-top:12px;
 }
 /* nút ‹ › hai bên băng chuyền */
@@ -299,7 +299,7 @@ h1,h2,h3,h4{text-wrap:balance}
 .reception-time span{font-size:var(--fs-eyebrow);letter-spacing:.32em}
 .reception-meta{
   display:flex;justify-content:center;gap:clamp(18px,6vw,44px);margin-top:36px;
-  font-size:.72rem;letter-spacing:.24em;color:var(--muted);font-weight:500;
+  font-size:.8rem;letter-spacing:.24em;color:var(--muted);font-weight:500;
 }
 .reception-meta b{display:block;font:400 clamp(1.3rem,3.4vw,1.6rem) var(--serif);color:var(--green);margin-top:8px;letter-spacing:.02em}
 
@@ -312,13 +312,13 @@ h1,h2,h3,h4{text-wrap:balance}
   display:block;font:400 var(--fs-number-md)/1.1 var(--serif);color:#ece4d2;
   font-variant-numeric:tabular-nums;
 }
-.count-grid span{font-size:.72rem;letter-spacing:.24em;color:var(--muted);font-weight:500;text-transform:uppercase}
+.count-grid span{font-size:.8rem;letter-spacing:.24em;color:var(--muted);font-weight:500;text-transform:uppercase}
 
 /* ---------- Lịch ---------- */
 .calendar-box{max-width:520px;margin:auto;border:1px solid var(--card-line);padding:26px;background:var(--card);border-radius:14px}
 .cal-head,.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);text-align:center}
-.cal-head{font-size:.72rem;letter-spacing:.1em;color:var(--muted);padding-bottom:15px;font-weight:500}
-.cal-grid span{padding:9px 0;font:400 1rem var(--serif)}
+.cal-head{font-size:.8rem;letter-spacing:.1em;color:var(--muted);padding-bottom:15px;font-weight:500}
+.cal-grid span{padding:9px 0;font:400 1.08rem var(--serif)}
 .cal-grid .empty{visibility:hidden}
 /* ngày cưới — ô biến thành trái tim hồng, số ngày nằm giữa thân tim
    (line-height phải đứng SAU shorthand font: — shorthand font sẽ reset line-height) */
@@ -331,13 +331,13 @@ h1,h2,h3,h4{text-wrap:balance}
 }
 /* ngày tiệc trước 1 ngày — khoanh tròn vàng nhẹ */
 .cal-grid .party{width:34px;height:34px;justify-self:center;padding-top:9px;border:1px solid var(--gold);border-radius:50%;color:var(--gold)}
-.cal-legend{display:flex;justify-content:center;gap:26px;flex-wrap:wrap;margin-top:22px;font-size:.78rem;color:var(--muted);letter-spacing:.05em}
+.cal-legend{display:flex;justify-content:center;gap:26px;flex-wrap:wrap;margin-top:22px;font-size:.85rem;color:var(--muted);letter-spacing:.05em}
 .cal-legend i{display:inline-block;vertical-align:middle;margin-right:8px}
 .lg-heart{width:14px;height:13px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' fill='%23e9cec2'/%3E%3C/svg%3E") center/contain no-repeat}
 .lg-party{width:10px;height:10px;border:1.5px solid var(--gold);border-radius:50%}
 .calendar-link,.map-link{
   display:block;text-align:center;margin:26px auto 0;color:var(--green);
-  text-decoration:none;font-size:.8rem;letter-spacing:.24em;font-weight:500;
+  text-decoration:none;font-size:.88rem;letter-spacing:.24em;font-weight:500;
   transition:color .3s,letter-spacing .3s var(--ease);
 }
 .calendar-link:hover,.map-link:hover{color:#dce5c9;letter-spacing:.3em}
@@ -346,7 +346,7 @@ h1,h2,h3,h4{text-wrap:balance}
 .form-card{max-width:520px;margin:auto;display:grid;gap:12px}
 .form-card input,.form-card textarea,.form-card select{
   width:100%;border:1px solid rgba(233,220,190,.22);background:rgba(9,13,26,.55);padding:14px 16px;
-  outline:none;color:var(--ink);font-size:.95rem;border-radius:8px;
+  outline:none;color:var(--ink);font-size:1rem;border-radius:8px;
   transition:border-color .3s,box-shadow .3s;
 }
 .form-card input::placeholder,.form-card textarea::placeholder{color:#9aa18f}
@@ -360,18 +360,18 @@ h1,h2,h3,h4{text-wrap:balance}
   height:1px!important;width:1px!important;padding:0!important;border:0!important;
   opacity:0;pointer-events:none;
 }
-.local-note{text-align:center;color:var(--muted);font-size:.8rem;margin-top:18px;letter-spacing:.04em}
+.local-note{text-align:center;color:var(--muted);font-size:.88rem;margin-top:18px;letter-spacing:.04em}
 .rsvp-stats{
   text-align:center;font:italic 400 .95rem var(--serif);color:var(--green);
   margin:14px 0 0;letter-spacing:.02em;
 }
 .rsvp-stats:empty{display:none}
-.wishes-empty{text-align:center;color:var(--muted);font-size:.85rem;letter-spacing:.06em}
+.wishes-empty{text-align:center;color:var(--muted);font-size:.92rem;letter-spacing:.06em}
 
 /* ---------- Địa điểm ---------- */
 .venue{text-align:center}
 .venue h3{font:400 clamp(1.5rem,3.8vw,1.9rem) var(--serif);color:#f0e7d3}
-.venue p{color:var(--muted);font-size:.92rem;letter-spacing:.02em}
+.venue p{color:var(--muted);font-size:1rem;letter-spacing:.02em}
 /* Sơ đồ đường đi vẽ sẵn — không phụ thuộc mạng */
 .map-card{
   position:relative;max-width:640px;margin:28px auto 0;border-radius:16px;overflow:hidden;
@@ -383,7 +383,7 @@ h1,h2,h3,h4{text-wrap:balance}
 .map-btn{
   position:absolute;left:50%;bottom:16px;translate:-50% 0;white-space:nowrap;
   background:#fffdf9f2;border:1px solid var(--green);color:var(--green-dark);
-  padding:.95em 1.9em;border-radius:999px;font-size:.76rem;font-weight:600;letter-spacing:.16em;
+  padding:.95em 1.9em;border-radius:999px;font-size:.82rem;font-weight:600;letter-spacing:.16em;
   text-decoration:none;box-shadow:0 10px 24px rgba(29,36,29,.2);
   transition:all .3s var(--ease);
 }
@@ -396,18 +396,18 @@ h1,h2,h3,h4{text-wrap:balance}
   content:"";position:absolute;width:7px;height:7px;background:var(--green);border-radius:50%;
   left:-4px;top:26px;box-shadow:0 0 0 4px rgba(156,179,136,.18);
 }
-.timeline time{color:var(--green);font:400 1.2rem var(--serif)}
-.timeline span{font-size:.92rem;padding-top:5px;letter-spacing:.03em}
+.timeline time{color:var(--green);font:400 1.3rem var(--serif)}
+.timeline span{font-size:1rem;padding-top:5px;letter-spacing:.03em}
 
 /* ---------- Sổ lưu bút ---------- */
 .wishes{max-width:520px;margin:35px auto}
 .wish{background:var(--card);border:1px solid var(--card-line);padding:20px 22px;margin-bottom:10px;border-radius:10px}
-.wish strong{font:400 1.15rem var(--serif);color:var(--green)}
-.wish p{font-size:.95rem;line-height:1.8;margin-bottom:0;color:var(--ink)}
+.wish strong{font:400 1.22rem var(--serif);color:var(--green)}
+.wish p{font-size:1.05rem;line-height:1.8;margin-bottom:0;color:var(--ink)}
 
 /* ---------- Hộp quà → Hố đen ---------- */
 .gift{text-align:center}
-.gift-hint{line-height:2.1;color:var(--green);letter-spacing:.3em;font-size:.85rem}
+.gift-hint{line-height:2.1;color:var(--green);letter-spacing:.3em;font-size:.95rem}
 
 /* Hố đen quay — đĩa bồi tụ */
 .blackhole{
@@ -542,7 +542,7 @@ h1,h2,h3,h4{text-wrap:balance}
 @keyframes lb-zoom{from{opacity:0;transform:scale(.93)}}
 .lightbox-caption{
   position:absolute;bottom:48px;left:0;right:0;text-align:center;color:#fff;
-  font:italic 400 .95rem var(--serif);opacity:.9;pointer-events:none;
+  font:italic 400 1.05rem var(--serif);opacity:.9;pointer-events:none;
   animation:lb-zoom .5s var(--ease);
 }
 .lightbox button,.modal-close{
@@ -555,7 +555,7 @@ h1,h2,h3,h4{text-wrap:balance}
 .lightbox-next{right:16px;top:50%;translate:0 -50%}
 .lightbox-counter{
   position:absolute;bottom:22px;left:0;right:0;text-align:center;color:#fff;
-  font-size:.78rem;letter-spacing:.24em;opacity:.85;
+  font-size:.86rem;letter-spacing:.24em;opacity:.85;
 }
 .gift-modal{background:#0b1220e0}
 .gift-modal h3{position:absolute;top:55px;color:#fff;font:400 1.9rem var(--serif);font-weight:400}
@@ -563,12 +563,12 @@ h1,h2,h3,h4{text-wrap:balance}
 .bank-card{text-align:center;background:#fffdf9;padding:28px 22px;border-radius:14px}
 .bank-card h4{font:400 1.2rem var(--serif);color:#40523b;margin:0 0 16px}
 .bank-card img{width:180px;height:180px;object-fit:contain;background:#fff;border-radius:8px;margin:auto}
-.bank-card p{font-size:.8rem;line-height:1.9;color:var(--muted-light-bg);letter-spacing:.03em}
+.bank-card p{font-size:.88rem;line-height:1.9;color:var(--muted-light-bg);letter-spacing:.03em}
 .modal-close{right:20px;top:10px}
 /* QR — chạm để phóng to, tải về trong bản phóng to */
 .bank-card .qr-zoom{cursor:pointer;transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
 .bank-card .qr-zoom:hover{transform:scale(1.05);box-shadow:0 8px 20px rgba(29,36,29,.18)}
-.qr-hint{display:block;margin-top:12px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-light-bg)}
+.qr-hint{display:block;margin-top:12px;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-light-bg)}
 .qr-viewer{
   position:fixed;inset:0;background:#0b1220f5;z-index:2100;display:none;
   align-items:center;justify-content:center;padding:30px;
@@ -581,11 +581,11 @@ h1,h2,h3,h4{text-wrap:balance}
 }
 .qr-viewer-card figcaption{font:400 1.35rem var(--serif);color:var(--green-dark);margin-bottom:18px}
 .qr-viewer-card img{display:block;width:min(70vw,310px);height:auto;object-fit:contain;background:#fff;border-radius:10px;margin:0 auto}
-.qr-viewer-tip{font-size:.8rem;line-height:1.8;color:var(--muted-light-bg);letter-spacing:.03em;margin:16px 0 18px}
-.qr-fallback-tip{margin:12px 0 0;font-size:.72rem}
+.qr-viewer-tip{font-size:.88rem;line-height:1.8;color:var(--muted-light-bg);letter-spacing:.03em;margin:16px 0 18px}
+.qr-fallback-tip{margin:12px 0 0;font-size:.78rem}
 .qr-download{
   display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;
-  font-family:var(--sans);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;
+  font-family:var(--sans);font-size:.84rem;letter-spacing:.18em;text-transform:uppercase;
   padding:.95em 1.9em;border-radius:999px;background:var(--green-dark);color:var(--cream);
   transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s;
 }
@@ -617,8 +617,10 @@ h1,h2,h3,h4{text-wrap:balance}
   .family-grid{grid-template-columns:1fr}
   .timeline li{grid-template-columns:78px 1fr;padding-left:22px}
   .reception-meta{gap:16px}
+  .mini-date{gap:10px}
+  .mini-date b{font-size:.7rem;letter-spacing:.18em}
   /* nút chỉ đường trên bản đồ nhỏ gọn lại cho vừa điện thoại */
-  .map-btn{font-size:.64rem;padding:.7em 1.35em;letter-spacing:.12em;bottom:12px;box-shadow:0 6px 14px rgba(29,36,29,.22)}
+  .map-btn{font-size:.7rem;padding:.7em 1.35em;letter-spacing:.12em;bottom:12px;box-shadow:0 6px 14px rgba(29,36,29,.22)}
   .gift-grid{grid-template-columns:1fr;max-height:72vh;overflow:auto}
   .gift-modal h3{top:14px;font-size:1.4rem}
   .bank-card img{width:140px;height:140px}
@@ -626,7 +628,7 @@ h1,h2,h3,h4{text-wrap:balance}
   .qr-viewer-card img{width:min(62vw,270px)}
   .cal-grid .selected{width:40px;height:36px;line-height:30px;padding-bottom:3px;font-size:.92rem}
   .cal-grid .party{width:30px;height:30px;padding-top:7px}
-  .cal-legend{gap:14px;font-size:.72rem}
+  .cal-legend{gap:14px;font-size:.78rem}
   .count-grid strong{font-size:2rem}
   .petal{display:none}
 }
