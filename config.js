@@ -43,7 +43,7 @@ const WEDDING_CONFIG = {
   reception: {
     guestTime: "16:00",
     startTime: "16:30",
-    venue: "Tại tư gia nhà giá",
+    venue: "Tại tư gia nhà gái",
     address: "Thôn Kim Thượng, xã Đa Phúc, thành phố Hà Nội",
     // Tọa độ chính xác vị trí tiệc (lấy từ Google Maps) — bản đồ ghim đúng tới từng mét
     coords: "21.20309, 105.9061",
